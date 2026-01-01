@@ -1,16 +1,21 @@
-## Hi there 👋
+# Raíz y Rescate
 
-<!--
-**raiz-y-rescate/raiz-y-rescate** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## English
 
-Here are some ideas to get you started:
+Raíz y Rescate is a living archive for learning, land, and regeneration.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+This space is being built slowly and with care.  
+It will hold ideas, tools, and resources for education, growing, and imagining more grounded ways of living.
+
+This project is evolving. More will be added over time.
+
+---
+
+## Español
+
+Raíz y Rescate es un archivo vivo para el aprendizaje, la tierra y la regeneración.
+
+Este espacio se está construyendo poco a poco y con cuidado.  
+Aquí se reunirán ideas, herramientas y recursos para la educación, el cultivo y la imaginación de formas de vida más arraigadas y conscientes.
+
+Este proyecto está en evolución. Pronto habrá más.
