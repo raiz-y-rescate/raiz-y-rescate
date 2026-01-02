@@ -4,16 +4,83 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Raíz y Rescate</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#2f6f4e" />
 </head>
 <body>
-  <h1>Raíz y Rescate</h1>
-  <p>A living archive for learning, land, and regeneration.</p>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <h1>Raíz y Rescate</h1>
+          <p>Living archive • learning • land • regeneration</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a class="pill" href="escuela/">Escuela</a>
+        <a class="pill" href="escuela/curriculum/">Curriculum</a>
+        <a class="pill" href="#" title="Coming soon">Agua & Cultivo</a>
+      </nav>
+    </div>
 
-  <h2>Projects</h2>
-  <ul>
-    <li><a href="escuela/">Escuela del Nuevo Mundo (Curriculum)</a></li>
-  </ul>
+    <section class="hero">
+      <h2>Rooted knowledge for the world ahead.</h2>
+      <p>
+        Raíz y Rescate is a living archive built slowly, with care — a place to gather tools,
+        ideas, and templates for education, growing, and grounded community building.
+      </p>
+      <p class="small" style="margin-top:10px">
+        Bilingual by design • Offline-friendly • Community-ready
+      </p>
+    </section>
 
-  <p><em>More coming soon.</em></p>
+    <section class="grid">
+      <div class="card span6">
+        <h3>Start here: Escuela del Nuevo Mundo</h3>
+        <p>The first project inside Raíz y Rescate — a practical, teacher-friendly curriculum map for the shift.</p>
+        <ul>
+          <li><a href="escuela/">Go to Escuela →</a></li>
+          <li><a href="escuela/curriculum/">View the curriculum bones →</a></li>
+        </ul>
+      </div>
+
+      <div class="card span6">
+        <h3>What this becomes</h3>
+        <p>
+          A simple site now. Later, an easy-to-navigate “app-like” library that works offline,
+          supports local communities, and grows into real-world spaces.
+        </p>
+        <ul>
+          <li>Curriculum templates for educators</li>
+          <li>Water & growing systems</li>
+          <li>Local learning pods & community nodes</li>
+        </ul>
+      </div>
+
+      <div class="card span4">
+        <h3>For teachers</h3>
+        <p>Clear starting points, gentle structure, no overwhelm.</p>
+      </div>
+
+      <div class="card span4">
+        <h3>For families</h3>
+        <p>Practical learning anchored in real life.</p>
+      </div>
+
+      <div class="card span4">
+        <h3>For land</h3>
+        <p>Regeneration, water, food, and resilient systems.</p>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span class="badge">More coming soon 🌱</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
+
