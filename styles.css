@@ -78,3 +78,9 @@ details .content{
   padding: 6px 6px 10px 52px;
   color:var(-
 
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.pill{ white-space:nowrap; }
