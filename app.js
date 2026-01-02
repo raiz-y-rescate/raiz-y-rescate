@@ -29,3 +29,16 @@ if ("serviceWorker" in navigator) {
     setLang(initial);
   });
 })();
+// Accordion: only one open at a time (optional)
+window.addEventListener("DOMContentLoaded", () => {
+  const groups = document.querySelectorAll("details.group");
+  groups.forEach((d) => {
+    d.addEventListener("toggle", () => {
+      if (d.open) {
+        groups.forEach((other) => {
+          if (other !== d) other.removeAttribute("open");
+        });
+      }
+    });
+  });
+});
