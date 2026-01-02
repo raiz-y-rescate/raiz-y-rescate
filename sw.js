@@ -8,18 +8,25 @@ const ASSETS = [
 
   "/raiz-y-rescate/shift/",
   "/raiz-y-rescate/shift/index.html",
+
   "/raiz-y-rescate/remains-changes/",
   "/raiz-y-rescate/remains-changes/index.html",
+
   "/raiz-y-rescate/structures/",
   "/raiz-y-rescate/structures/index.html",
+
   "/raiz-y-rescate/learning/",
   "/raiz-y-rescate/learning/index.html",
+
   "/raiz-y-rescate/land-water/",
   "/raiz-y-rescate/land-water/index.html",
+
   "/raiz-y-rescate/prototypes/",
   "/raiz-y-rescate/prototypes/index.html",
+
   "/raiz-y-rescate/about/",
   "/raiz-y-rescate/about/index.html",
+
   "/raiz-y-rescate/library/",
   "/raiz-y-rescate/library/index.html",
 
@@ -29,7 +36,7 @@ const ASSETS = [
   "/raiz-y-rescate/escuela/curriculum/index.html"
 ];
 
-// INSTALL — cache files
+// INSTALL — pre-cache known assets
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE).then((cache) => cache.addAll(ASSETS))
@@ -42,41 +49,36 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys.map((key) => {
-          if (key !== CACHE) {
-            return caches.delete(key);
-          }
+          if (key !== CACHE) return caches.delete(key);
         })
       )
     )
   );
 });
 
-// FETCH — serve cached first, then network
+// FETCH — HTML = network-first, assets = cache-first
 self.addEventListener("fetch", (event) => {
-  const req = event.request;
+  const request = event.request;
 
-  // Only handle GET
-  if (req.method !== "GET") return;
+  if (request.method !== "GET") return;
 
-  const accept = req.headers.get("accept") || "";
+  const accept = request.headers.get("accept") || "";
   const isHTML = accept.includes("text/html");
 
-  // For HTML pages: NETWORK FIRST (fresh pages), fallback to cache
   if (isHTML) {
     event.respondWith(
-      fetch(req)
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((cache) => cache.put(req, copy));
-          return res;
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE).then((cache) => cache.put(request, copy));
+          return response;
         })
-        .catch(() => caches.match(req))
+        .catch(() => caches.match(request))
     );
-    return;
+  } else {
+    event.respondWith(
+      caches.match(request).then((cached) => cached || fetch(request))
+    );
   }
-
-  // For CSS/JS/images: CACHE FIRST (fast + offline)
-  event.respondWith(
-    caches.match(req).then((cached) => cached || fetch(req))
-  );
 });
+
