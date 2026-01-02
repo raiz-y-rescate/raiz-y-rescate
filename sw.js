@@ -1,4 +1,4 @@
-const CACHE = "ryr-v4";
+const CACHE = "ryr-v5";
 
 const ASSETS = [
   "/raiz-y-rescate/",
