@@ -1,0 +1,9 @@
+{
+  "name": "Raíz y Rescate",
+  "short_name": "Raíz y Rescate",
+  "start_url": "/raiz-y-rescate/",
+  "display": "standalone",
+  "background_color": "#fbfaf7",
+  "theme_color": "#2f6f4e",
+  "icons": []
+}
