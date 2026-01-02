@@ -35,9 +35,30 @@ self.addEventListener("activate", (event) => {
 
 // FETCH — serve cached first, then network
 self.addEventListener("fetch", (event) => {
+  const req = event.request;
+
+  // Only handle GET
+  if (req.method !== "GET") return;
+
+  const accept = req.headers.get("accept") || "";
+  const isHTML = accept.includes("text/html");
+
+  // For HTML pages: NETWORK FIRST (fresh pages), fallback to cache
+  if (isHTML) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE).then((cache) => cache.put(req, copy));
+          return res;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // For CSS/JS/images: CACHE FIRST (fast + offline)
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return cached || fetch(event.request);
-    })
+    caches.match(req).then((cached) => cached || fetch(req))
   );
 });
