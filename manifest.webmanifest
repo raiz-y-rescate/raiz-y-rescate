@@ -1,9 +1,11 @@
 {
   "name": "Raíz y Rescate",
-  "short_name": "Raíz y Rescate",
+  "short_name": "Raíz",
   "start_url": "/raiz-y-rescate/",
+  "scope": "/raiz-y-rescate/",
   "display": "standalone",
   "background_color": "#fbfaf7",
   "theme_color": "#2f6f4e",
+  "description": "Rooted Futures — learning, land, and regeneration.",
   "icons": []
 }
