@@ -1,5 +1,5 @@
-// Very small offline cache (safe starter)
-const CACHE = "ryr-v1";
+const CACHE = "ryr-v2";
+
 const ASSETS = [
   "/raiz-y-rescate/",
   "/raiz-y-rescate/index.html",
@@ -11,12 +11,33 @@ const ASSETS = [
   "/raiz-y-rescate/escuela/curriculum/index.html"
 ];
 
-self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
+// INSTALL — cache files
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE).then((cache) => cache.addAll(ASSETS))
+  );
 });
 
-self.addEventListener("fetch", (e) => {
-  e.respondWith(
-    caches.match(e.request).then((cached) => cached || fetch(e.request))
+// ACTIVATE — clean old caches
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE) {
+            return caches.delete(key);
+          }
+        })
+      )
+    )
+  );
+});
+
+// FETCH — serve cached first, then network
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      return cached || fetch(event.request);
+    })
   );
 });
