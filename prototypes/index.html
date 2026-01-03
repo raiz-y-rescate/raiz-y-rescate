@@ -73,5 +73,31 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const enBtn = document.getElementById("btn-en");
+    const esBtn = document.getElementById("btn-es");
+
+    if (!enBtn || !esBtn) return;
+
+    function setLanguage(lang) {
+      document.querySelectorAll("[data-lang]").forEach(el => {
+        el.hidden = el.getAttribute("data-lang") !== lang;
+      });
+
+      enBtn.classList.toggle("is-active", lang === "en");
+      esBtn.classList.toggle("is-active", lang === "es");
+
+      localStorage.setItem("lang", lang);
+    }
+
+    enBtn.addEventListener("click", () => setLanguage("en"));
+    esBtn.addEventListener("click", () => setLanguage("es"));
+
+    setLanguage(localStorage.getItem("lang") || "en");
+  });
+</script>
+
 </body>
 </html>
