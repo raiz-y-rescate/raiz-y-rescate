@@ -2,70 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PAGE_TITLE | Raíz y Rescate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototypes | Raíz y Rescate</title>
+
   <link rel="stylesheet" href="/raiz-y-rescate/styles.css" />
   <link rel="manifest" href="/raiz-y-rescate/manifest.webmanifest" />
+  <meta name="description" content="Prototypes — experiments, drafts, and test builds for the future system." />
 </head>
+
 <body>
   <div class="container">
-    <div class="header">
-  <div class="brand">
-    <div class="mark" aria-hidden="true"></div>
-    <div>
-      <h1>PAGE_H1</h1>
-      <p>PAGE_TAGLINE</p>
-    </div>
-  </div>
 
-  <div class="toolbar">
-    <nav class="nav">
-      <a class="pill" href="/raiz-y-rescate/">Home</a>
-      <a class="pill" href="/raiz-y-rescate/shift/">The Shift</a>
-      <a class="pill" href="/raiz-y-rescate/remains-changes/">What Remains / What Changes</a>
-      <a class="pill" href="/raiz-y-rescate/structures/">New World Structures</a>
-      <a class="pill" href="/raiz-y-rescate/learning/">Learning & Children</a>
-      <a class="pill" href="/raiz-y-rescate/land-water/">Land, Water & Regeneration</a>
-      <a class="pill" href="/raiz-y-rescate/prototypes/">Prototypes</a>
-      <a class="pill" href="/raiz-y-rescate/about/">About</a>
-      <a class="pill" href="/raiz-y-rescate/library/">Library</a>
-    </nav>
+    <header class="header">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <h1>Raíz y Rescate</h1>
+          <p class="tagline">Experiments & Drafts</p>
+        </div>
+      </div>
 
-    <div class="toggle" aria-label="Language toggle">
-      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
-      <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
-    </div>
-  </div>
-</div>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="/raiz-y-rescate/">Home</a>
+        <a class="nav-link" href="/raiz-y-rescate/learning/">Learning</a>
+        <a class="nav-link" href="/raiz-y-rescate/structures/">Structures</a>
+        <a class="nav-link" href="/raiz-y-rescate/land-water/">Land & Water</a>
+        <a class="nav-link" href="/raiz-y-rescate/shift/">Shift</a>
+        <a class="nav-link" href="/raiz-y-rescate/remains-changes/">Remains</a>
+        <a class="nav-link" href="/raiz-y-rescate/library/">Library</a>
+        <a class="nav-link is-active" href="/raiz-y-rescate/prototypes/">Prototypes</a>
+        <a class="nav-link" href="/raiz-y-rescate/about/">About</a>
+      </nav>
+    </header>
 
+    <main class="main">
+      <h2>Prototypes</h2>
+      <p class="lede">
+        This is where we test ideas: lesson formats, building steps, land systems, and future “agents.”
+        Keep it lightweight and practical.
+      </p>
 
-    <section class="hero">
-      <h2>PAGE_H2</h2>
-      <p class="lede">PAGE_INTRO</p>
-    </section>
-
-    <section class="grid">
-      <div class="card span6">
-        <h3>Section One (bones)</h3>
-        <ul>
-          <li>Bullet</li>
-          <li>Bullet</li>
-          <li>Bullet</li>
+      <section class="card">
+        <h3>Suggested prototype list</h3>
+        <ul class="list">
+          <li>One 30-minute circle plan (Group 1)</li>
+          <li>One “Adobe mix + wall test” checklist</li>
+          <li>One water-harvesting micro-system sketch</li>
+          <li>One “Ask the Guide” prompt set (future agent)</li>
         </ul>
-      </div>
+      </section>
+    </main>
 
-      <div class="card span6">
-        <h3>Section Two (bones)</h3>
-        <p class="lede">Short paragraph.</p>
-      </div>
-    </section>
+    <footer class="footer">
+      <p>© <span id="year"></span> Raíz y Rescate</p>
+    </footer>
 
-    <div class="footer">
-      <span class="badge">Built slowly, with care 🌱</span>
-    </div>
   </div>
 
-  <script src="/raiz-y-rescate/app.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
