@@ -2,82 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Learning & Children | Raíz y Rescate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning | Raíz y Rescate</title>
   <link rel="stylesheet" href="/raiz-y-rescate/styles.css" />
   <link rel="manifest" href="/raiz-y-rescate/manifest.webmanifest" />
+  <meta name="description" content="Learning pathways — emotional mastery, curiosity, practical skill, and innovation." />
 </head>
 
 <body>
   <div class="container">
-    <div class="header">
+    <header class="header">
       <div class="brand">
         <div class="mark" aria-hidden="true"></div>
-        <div>
-          <h1>Learning & Children</h1>
-          <p>Curiosity before curriculum • Nature + projects + community</p>
+        <div class="brand-text">
+          <h1>Raíz y Rescate</h1>
+          <p class="tagline">Learning & Children</p>
         </div>
       </div>
 
-      <div class="toolbar">
-        <nav class="nav">
-          <a class="pill" href="/raiz-y-rescate/">Home</a>
-          <a class="pill" href="/raiz-y-rescate/shift/">The Shift</a>
-          <a class="pill" href="/raiz-y-rescate/remains-changes/">What Remains / What Changes</a>
-          <a class="pill" href="/raiz-y-rescate/structures/">New World Structures</a>
-          <a class="pill" href="/raiz-y-rescate/learning/">Learning & Children</a>
-          <a class="pill" href="/raiz-y-rescate/land-water/">Land, Water & Regeneration</a>
-          <a class="pill" href="/raiz-y-rescate/prototypes/">Prototypes</a>
-          <a class="pill" href="/raiz-y-rescate/about/">About</a>
-          <a class="pill" href="/raiz-y-rescate/library/">Library</a>
-        </nav>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="/raiz-y-rescate/">Home</a>
+        <a class="nav-link is-active" href="/raiz-y-rescate/learning/">Learning</a>
+        <a class="nav-link" href="/raiz-y-rescate/structures/">Structures</a>
+        <a class="nav-link" href="/raiz-y-rescate/land/">Land</a>
+        <a class="nav-link" href="/raiz-y-rescate/about/">About</a>
+      </nav>
+    </header>
 
-        <div class="toggle" aria-label="Language toggle">
-          <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
-          <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
-        </div>
-      </div>
-    </div>
-
-    <section class="hero">
-      <h2>Learning that feels like life</h2>
+    <main class="main">
+      <h2>Learning</h2>
       <p class="lede">
         Learning here is not a system to force growth, but a way to support it.
         We learn through life, land, story, and meaningful contribution.
       </p>
-    </section>
 
-    <section class="grid">
-      <div class="card span12">
-        <h3 id="curriculum">The Learning Pathways</h3>
-        <p class="small"><details class="group">
-  <summary class="group-summary">
-    <div class="group-left">
-      <div class="group-icon">1</div>
-      <div>
-        <h4 class="group-title">Group 1: Foundations</h4>
-        <p class="group-sub">Basics of self, community, and nature.</p>
-      </div>
-    </div>
-    <span class="chev">▼</span>
-  </summary>
-  <div class="content">
-    <!-- Your curriculum details here -->
-    <p>Details on learning pathways...</p>
-  </div>
-</details>
-<!-- Add more for Groups 2-7 -->
+      <section class="grid">
+        <article class="card">
+          <h3>Pathways</h3>
+          <p>Grouped journeys from foundational regulation to innovation and leadership.</p>
+          <!-- Later link: /learning/pathways/ -->
+          <a class="link" href="#">Coming soon →</a>
+        </article>
 
-        <!-- Paste your collapsible Group 1–7 blocks here -->
-      </div>
-    </section>
+        <article class="card">
+          <h3>Circle Lessons</h3>
+          <p>Printable prompts, story-led sessions, and outdoor activities.</p>
+          <a class="link" href="#">Coming soon →</a>
+        </article>
 
-    <div class="footer">
-      <span class="badge">Built slowly, with care 🌱</span>
-    </div>
+        <article class="card">
+          <h3>Teacher Co-Pilot (future)</h3>
+          <p>An AI helper that builds daily plans, adapts to age, and generates handouts.</p>
+          <a class="link" href="/raiz-y-rescate/about/">How it works →</a>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Raíz y Rescate</p>
+    </footer>
   </div>
 
-  <script src="/raiz-y-rescate/app.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
