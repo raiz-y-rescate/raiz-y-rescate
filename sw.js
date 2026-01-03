@@ -1,4 +1,4 @@
-const CACHE = "ryr-v8";
+const CACHE = "ryr-v9";
 
 const ASSETS = [
   "/raiz-y-rescate/",
@@ -30,10 +30,7 @@ const ASSETS = [
   "/raiz-y-rescate/library/",
   "/raiz-y-rescate/library/index.html",
 
-  "/raiz-y-rescate/escuela/",
-  "/raiz-y-rescate/escuela/index.html",
-  "/raiz-y-rescate/escuela/curriculum/",
-  "/raiz-y-rescate/escuela/curriculum/index.html"
+
 ];
 
 // INSTALL — pre-cache known assets
