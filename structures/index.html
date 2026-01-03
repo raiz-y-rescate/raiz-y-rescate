@@ -22,26 +22,35 @@
         </div>
       </div>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="/raiz-y-rescate/">Home</a>
-        <a class="nav-link" href="/raiz-y-rescate/learning/">Learning</a>
-        <a class="nav-link is-active" href="/raiz-y-rescate/structures/">Structures</a>
-        <a class="nav-link" href="/raiz-y-rescate/land-water/">Land & Water</a>
-        <a class="nav-link" href="/raiz-y-rescate/shift/">Shift</a>
-        <a class="nav-link" href="/raiz-y-rescate/remains-changes/">Remains</a>
-        <a class="nav-link" href="/raiz-y-rescate/library/">Library</a>
-        <a class="nav-link" href="/raiz-y-rescate/prototypes/">Prototypes</a>
-        <a class="nav-link" href="/raiz-y-rescate/about/">About</a>
-      </nav>
-    </header>
+     <nav class="nav" aria-label="Primary">
+  <a class="nav-link" href="/raiz-y-rescate/">Home</a>
+  <a class="nav-link" href="/raiz-y-rescate/learning/">Learning</a>
+  <a class="nav-link is-active" href="/raiz-y-rescate/structures/">Structures</a>
+  <a class="nav-link" href="/raiz-y-rescate/land-water/">Land & Water</a>
+  <a class="nav-link" href="/raiz-y-rescate/shift/">Shift</a>
+  <a class="nav-link" href="/raiz-y-rescate/remains-changes/">Remains</a>
+  <a class="nav-link" href="/raiz-y-rescate/library/">Library</a>
+  <a class="nav-link" href="/raiz-y-rescate/prototypes/">Prototypes</a>
+  <a class="nav-link" href="/raiz-y-rescate/about/">About</a>
+</nav>
+
+<div class="lang-toggle" aria-label="Language selector">
+  <button type="button" id="btn-en" class="lang-btn is-active">EN</button>
+  <button type="button" id="btn-es" class="lang-btn">ES</button>
+</div>
 
     <main class="main">
       <h2>Structures</h2>
 
-      <p class="intro-line">
-        How we build reveals what we believe will last.
-      </p>
-
+    <p class="intro-line">
+  <span data-lang="en">
+    How we build reveals what we believe will last.
+  </span>
+  <span data-lang="es" hidden>
+    Cómo construimos revela lo que creemos que perdurará.
+  </span>
+</p>
+      
       <p class="lede">
   This section explores how building traditions evolve — what endures, what adapts,
   and what we are now called to reimagine.
@@ -105,8 +114,35 @@
 
   </div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const enBtn = document.getElementById("btn-en");
+    const esBtn = document.getElementById("btn-es");
+
+    if (!enBtn || !esBtn) return; // safety guard
+
+    function setLanguage(lang) {
+      document.querySelectorAll("[data-lang]").forEach(el => {
+        el.hidden = el.getAttribute("data-lang") !== lang;
+      });
+
+      enBtn.classList.toggle("is-active", lang === "en");
+      esBtn.classList.toggle("is-active", lang === "es");
+
+      localStorage.setItem("lang", lang);
+    }
+
+    enBtn.addEventListener("click", () => setLanguage("en"));
+    esBtn.addEventListener("click", () => setLanguage("es"));
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    setLanguage(savedLang);
+  });
+</script>
+
 </body>
 </html>
