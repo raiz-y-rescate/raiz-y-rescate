@@ -1,21 +1,16 @@
 /* --- App-like readability upgrades --- */
 .section-title{margin:0 0 10px;font-size:20px}
 .lede{font-size:15px;color:var(--muted);max-width:78ch}
-
 .stack > * + *{margin-top:12px}
-
 hr.soft{border:none;border-top:1px solid var(--border);margin:14px 0}
-
 .toolbar{
   display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
   margin-top:12px;
 }
-
 .toggle{
   display:flex; gap:8px; align-items:center;
   padding:8px 10px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.85);
 }
-
 .toggle button{
   border:1px solid var(--border);
   background:white;
@@ -27,7 +22,6 @@ hr.soft{border:none;border-top:1px solid var(--border);margin:14px 0}
   border-color:#cbbfae;
   box-shadow: 0 8px 20px rgba(0,0,0,.06);
 }
-
 .badge2{
   display:inline-flex;align-items:center;gap:8px;
   padding:7px 10px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.85);
@@ -41,9 +35,7 @@ details.group{
   background: rgba(255,255,255,.92);
   padding: 10px 12px;
 }
-
 details.group + details.group{margin-top:12px}
-
 summary.group-summary{
   list-style:none;
   display:flex; align-items:center; justify-content:space-between;
@@ -52,7 +44,6 @@ summary.group-summary{
   gap:12px;
 }
 summary.group-summary::-webkit-details-marker{display:none}
-
 .group-left{
   display:flex; align-items:flex-start; gap:12px;
 }
@@ -66,18 +57,44 @@ summary.group-summary::-webkit-details-marker{display:none}
 }
 .group-title{margin:0;font-size:16px}
 .group-sub{margin:2px 0 0;color:var(--muted);font-size:13px}
-
 .chev{
   color:var(--muted);
   font-size:18px;
   padding:0 8px;
 }
-
 details[open] summary .chev{transform: rotate(180deg)}
 details .content{
   padding: 6px 6px 10px 52px;
-  color:var(-
-
+  color:var(--muted);  /* fixed broken line */
+}
 .nav{display:flex;flex-wrap:wrap;gap:8px}
 .pill{white-space:nowrap}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+
+/* --- Story section (Land & Water) --- */
+.story-section{
+  margin: 2.5rem 0 2rem;
+  max-width: 680px;
+}
+.story-section p{
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text, inherit);
+  margin: 0 0 1.1rem;
+}
+.story-label{
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.4rem;
+}
+.story-pull{
+  font-size: 16px;
+  font-style: normal;
+  line-height: 1.65;
+  border-left: 2px solid #a3b899;
+  padding: 0.4rem 0 0.4rem 1.1rem;
+  margin: 1.75rem 0;
+  color: var(--muted);
+}
