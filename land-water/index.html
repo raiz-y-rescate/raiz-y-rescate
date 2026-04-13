@@ -4,80 +4,178 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Land & Water | Raíz y Rescate</title>
-
   <link rel="stylesheet" href="/raiz-y-rescate/styles.css" />
   <link rel="manifest" href="/raiz-y-rescate/manifest.webmanifest" />
   <meta name="description" content="Land & Water — soil, planting, microclimates, and water stewardship." />
 </head>
-
 <body>
   <div class="container">
-
     <header class="header">
       <div class="brand">
         <div class="mark" aria-hidden="true"></div>
         <div class="brand-text">
           <h1>Raíz y Rescate</h1>
-          <p class="tagline">Land & Water</p>
+          <p class="tagline" data-lang="en">Land & Water</p>
+          <p class="tagline" data-lang="es" hidden>Tierra y Agua</p>
         </div>
       </div>
-
       <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="/raiz-y-rescate/">Home</a>
-        <a class="nav-link" href="/raiz-y-rescate/learning/">Learning</a>
-        <a class="nav-link" href="/raiz-y-rescate/structures/">Structures</a>
-        <a class="nav-link is-active" href="/raiz-y-rescate/land-water/">Land & Water</a>
-        <a class="nav-link" href="/raiz-y-rescate/shift/">Shift</a>
-        <a class="nav-link" href="/raiz-y-rescate/remains-changes/">Remains</a>
-        <a class="nav-link" href="/raiz-y-rescate/library/">Library</a>
-        <a class="nav-link" href="/raiz-y-rescate/prototypes/">Prototypes</a>
-        <a class="nav-link" href="/raiz-y-rescate/about/">About</a>
+        <a class="nav-link" href="/raiz-y-rescate/">
+          <span data-lang="en">Home</span>
+          <span data-lang="es" hidden>Inicio</span>
+        </a>
+        <a class="nav-link" href="/raiz-y-rescate/learning/">
+          <span data-lang="en">Learning</span>
+          <span data-lang="es" hidden>Aprendizaje</span>
+        </a>
+        <a class="nav-link" href="/raiz-y-rescate/structures/">
+          <span data-lang="en">Structures</span>
+          <span data-lang="es" hidden>Estructuras</span>
+        </a>
+        <a class="nav-link is-active" href="/raiz-y-rescate/land-water/">
+          <span data-lang="en">Land & Water</span>
+          <span data-lang="es" hidden>Tierra y Agua</span>
+        </a>
+        <a class="nav-link" href="/raiz-y-rescate/shift/">
+          <span data-lang="en">Shift</span>
+          <span data-lang="es" hidden>Cambio</span>
+        </a>
+        <a class="nav-link" href="/raiz-y-rescate/remains-changes/">
+          <span data-lang="en">Remains</span>
+          <span data-lang="es" hidden>Permanencias</span>
+        </a>
+        <a class="nav-link" href="/raiz-y-rescate/library/">
+          <span data-lang="en">Library</span>
+          <span data-lang="es" hidden>Biblioteca</span>
+        </a>
+        <a class="nav-link" href="/raiz-y-rescate/prototypes/">
+          <span data-lang="en">Prototypes</span>
+          <span data-lang="es" hidden>Prototipos</span>
+        </a>
+        <a class="nav-link" href="/raiz-y-rescate/about/">
+          <span data-lang="en">About</span>
+          <span data-lang="es" hidden>Sobre este proyecto</span>
+        </a>
       </nav>
-
       <div class="lang-toggle" aria-label="Language selector">
-  <button type="button" id="btn-en" class="lang-btn is-active">EN</button>
-  <button type="button" id="btn-es" class="lang-btn">ES</button>
-</div>
-
+        <button type="button" id="btn-en" class="lang-btn is-active">EN</button>
+        <button type="button" id="btn-es" class="lang-btn">ES</button>
+      </div>
     </header>
 
     <main class="main">
-      <h2>Land & Water</h2>
 
-        <p class="intro-line">
-      Grounded practices for tending soil, water, and landscapes in ways that restore balance and support long-term abundance.
-       </p>
-      
-      <p class="lede">
+      <!-- Page heading -->
+      <h2 data-lang="en">Land & Water</h2>
+      <h2 data-lang="es" hidden>Tierra y Agua</h2>
+
+      <p class="intro-line" data-lang="en">
+        Grounded practices for tending soil, water, and landscapes in ways that restore balance and support long-term abundance.
+      </p>
+      <p class="intro-line" data-lang="es" hidden>
+        Prácticas con los pies en la tierra para cuidar el suelo, el agua y los paisajes de maneras que restauren el equilibrio y sostengan la abundancia a largo plazo.
+      </p>
+
+      <p class="lede" data-lang="en">
         The land is a teacher. Here we work with soil, water, plants, and cycles —
         to grow food, medicine, and stability.
       </p>
+      <p class="lede" data-lang="es" hidden>
+        La tierra es una maestra. Aquí trabajamos con el suelo, el agua, las plantas y los ciclos —
+        para cultivar alimento, medicina y estabilidad.
+      </p>
 
+      <!-- ── My Story section ── -->
+      <section class="story-section">
+
+        <p class="story-label" data-lang="en">My story as a gardener</p>
+        <p class="story-label" data-lang="es" hidden>Mi historia como jardinero</p>
+
+        <p data-lang="en">
+          In 2017 I moved into a two-story house that still held someone else's story — in the color of the walls, in the pool's water, in the front lawn. Next to it, about ten well-established rose bushes, their root systems deep and strong. A year into redesigning the inside, I decided to remove half of them. I had no idea what I was doing.
+        </p>
+        <p data-lang="es" hidden>
+          En 2017 me mudé a una casa de dos pisos que aún guardaba la historia de alguien más — en el color de las paredes, en el agua de la alberca, en el jardín. Al lado, unos diez rosales bien establecidos, con raíces profundas y fuertes. Un año después de rediseñar el interior, decidí arrancar la mitad. No tenía idea de lo que hacía.
+        </p>
+
+        <p data-lang="en">
+          I thought I was just changing the aesthetic — like repainting a wall. What I didn't understand yet was that removing those rose bushes was something different. They weren't decoration. They were alive, rooted, part of a story bigger than mine. I removed them without care, without consideration. I replaced them with my own design, my own "esthetics." I was suffering from something that most of us suffer from today: a total disconnection from land.
+        </p>
+        <p data-lang="es" hidden>
+          Pensé que solo estaba cambiando la estética — como pintar una pared. Lo que no entendía todavía era que arrancar esos rosales era otra cosa. No eran decoración. Estaban vivos, enraizados, parte de una historia más grande que la mía. Los quité sin cuidado, sin consideración. Los reemplacé con mi propio diseño, mi propia "estética." Sufría de algo que hoy sufrimos muchos: una desconexión total de la tierra.
+        </p>
+
+        <blockquote class="story-pull" data-lang="en">
+          But that is a whole topic in itself — and the land was about to teach me something.
+        </blockquote>
+        <blockquote class="story-pull" data-lang="es" hidden>
+          Pero eso es todo un tema en sí mismo — y la tierra estaba a punto de enseñarme algo.
+        </blockquote>
+
+        <p data-lang="en">
+          Fast forward to 2022. I purchased a 2.5-acre lot with a pretty little house up on the high desert. Still disconnected, I thought: when the time is right, I'll remove some of the juniper trees around the property to "clean up." Make room for infrastructure. We were also sold avocado and mango trees at a discount — about four each, plus four apricots. I didn't think twice. High desert. Mangos. Sure.
+        </p>
+        <p data-lang="es" hidden>
+          Avancemos al 2022. Compré un terreno de 2.5 acres con una casita bonita en el desierto alto. Todavía desconectado, pensé: cuando sea el momento, quitaré algunos árboles de junípero para "limpiar." Hacer espacio para infraestructura. También nos vendieron árboles de aguacate y mango con descuento — unos cuatro de cada uno, más cuatro albaricoques. No lo pensé dos veces. Desierto alto. Mangos. Claro que sí.
+        </p>
+
+        <p data-lang="en">
+          What I later learned was that the land was about to teach me something. Today, in 2026, I grow desert willows, palo verde, mesquite, pomegranates, and an olive tree. I recently planted rose bushes again — this time, knowing what I'm holding. I've learned to build cages to protect root balls from gophers, to find microclimates where my citrus can thrive, to plant dill to invite predatory insects that protect my Pakistan mulberry cuttings and my citrus, which is fruiting for the very first time.
+        </p>
+        <p data-lang="es" hidden>
+          Lo que aprendí después fue que la tierra estaba a punto de enseñarme algo. Hoy, en 2026, cultivo sauces del desierto, palo verde, mezquite, granadas y un olivo. Recientemente volví a plantar rosales — esta vez, sabiendo lo que sostengo. He aprendido a construir jaulas para proteger los cepellones de las tuzas, a encontrar microclimas donde mis cítricos prosperan, a plantar eneldo para atraer insectos beneficiosos que protegen mis esquejes de morera de Pakistán y mis cítricos, que están dando frutos por primera vez.
+        </p>
+
+        <blockquote class="story-pull" data-lang="en">
+          I don't have all the answers — nor will I ever. But come join me as I plant, fall, learn, and get back up.
+        </blockquote>
+        <blockquote class="story-pull" data-lang="es" hidden>
+          No tengo todas las respuestas — ni las tendré jamás. Pero ven, acompáñame mientras siembro, caigo, aprendo y me vuelvo a levantar.
+        </blockquote>
+
+        <p data-lang="en">
+          I'm building a desert oasis — the one we will all soon return to. Maybe not a desert oasis. Maybe a tropical one, even if it's in your backyard. We can all do this. This is where we come from, and this is where we are headed.
+        </p>
+        <p data-lang="es" hidden>
+          Estoy construyendo un oasis en el desierto — al que todos pronto regresaremos. Tal vez no un oasis en el desierto. Tal vez uno tropical, aunque sea en tu patio. Todos podemos hacer esto. De aquí venimos, y hacia aquí vamos.
+        </p>
+
+      </section>
+      <!-- ── end story ── -->
+
+      <!-- Existing cards -->
       <section class="grid">
         <article class="card">
-          <h3>Water & Microclimates</h3>
-          <p>Catch, store, shade, and slow — design for drought and wind.</p>
-          <a class="link" href="/raiz-y-rescate/prototypes/">Prototype a system →</a>
+          <h3 data-lang="en">Water & Microclimates</h3>
+          <h3 data-lang="es" hidden>Agua y Microclimas</h3>
+          <p data-lang="en">Catch, store, shade, and slow — design for drought and wind.</p>
+          <p data-lang="es" hidden>Captura, almacena, da sombra y reduce la velocidad — diseña para la sequía y el viento.</p>
+          <a class="link" href="/raiz-y-rescate/prototypes/" data-lang="en">Prototype a system →</a>
+          <a class="link" href="/raiz-y-rescate/prototypes/" data-lang="es" hidden>Prototipar un sistema →</a>
         </article>
-
         <article class="card">
-          <h3>Soil & Planting</h3>
-          <p>Compost, mulch, inoculation, and planting plans that match your place.</p>
-          <a class="link" href="/raiz-y-rescate/library/">Store recipes in Library →</a>
+          <h3 data-lang="en">Soil & Planting</h3>
+          <h3 data-lang="es" hidden>Suelo y Siembra</h3>
+          <p data-lang="en">Compost, mulch, inoculation, and planting plans that match your place.</p>
+          <p data-lang="es" hidden>Composta, mantillo, inoculación y planes de siembra que se adaptan a tu lugar.</p>
+          <a class="link" href="/raiz-y-rescate/library/" data-lang="en">Store recipes in Library →</a>
+          <a class="link" href="/raiz-y-rescate/library/" data-lang="es" hidden>Guardar recetas en la Biblioteca →</a>
         </article>
-
         <article class="card">
-          <h3>Land Steward (future)</h3>
-          <p>An AI helper that creates schedules, pest plans, and soil recipes.</p>
-          <a class="link" href="/raiz-y-rescate/about/">How it will work →</a>
+          <h3 data-lang="en">Land Steward <span style="font-weight:400;opacity:0.6;">(future)</span></h3>
+          <h3 data-lang="es" hidden>Guardián de la Tierra <span style="font-weight:400;opacity:0.6;">(próximamente)</span></h3>
+          <p data-lang="en">An AI helper that creates schedules, pest plans, and soil recipes.</p>
+          <p data-lang="es" hidden>Un asistente de IA que crea calendarios, planes de manejo de plagas y recetas para el suelo.</p>
+          <a class="link" href="/raiz-y-rescate/about/" data-lang="en">How it will work →</a>
+          <a class="link" href="/raiz-y-rescate/about/" data-lang="es" hidden>Cómo funcionará →</a>
         </article>
       </section>
+
     </main>
 
     <footer class="footer">
       <p>© <span id="year"></span> Raíz y Rescate</p>
     </footer>
-
   </div>
 
   <script>
@@ -85,29 +183,25 @@
   </script>
 
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const enBtn = document.getElementById("btn-en");
-    const esBtn = document.getElementById("btn-es");
+    document.addEventListener("DOMContentLoaded", () => {
+      const enBtn = document.getElementById("btn-en");
+      const esBtn = document.getElementById("btn-es");
+      if (!enBtn || !esBtn) return;
 
-    if (!enBtn || !esBtn) return;
+      function setLanguage(lang) {
+        document.querySelectorAll("[data-lang]").forEach(el => {
+          el.hidden = el.getAttribute("data-lang") !== lang;
+        });
+        enBtn.classList.toggle("is-active", lang === "en");
+        esBtn.classList.toggle("is-active", lang === "es");
+        document.documentElement.lang = lang;
+        localStorage.setItem("lang", lang);
+      }
 
-    function setLanguage(lang) {
-      document.querySelectorAll("[data-lang]").forEach(el => {
-        el.hidden = el.getAttribute("data-lang") !== lang;
-      });
-
-      enBtn.classList.toggle("is-active", lang === "en");
-      esBtn.classList.toggle("is-active", lang === "es");
-
-      localStorage.setItem("lang", lang);
-    }
-
-    enBtn.addEventListener("click", () => setLanguage("en"));
-    esBtn.addEventListener("click", () => setLanguage("es"));
-
-    setLanguage(localStorage.getItem("lang") || "en");
-  });
-</script>
-
+      enBtn.addEventListener("click", () => setLanguage("en"));
+      esBtn.addEventListener("click", () => setLanguage("es"));
+      setLanguage(localStorage.getItem("lang") || "en");
+    });
+  </script>
 </body>
 </html>
