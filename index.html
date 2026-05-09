@@ -10,6 +10,95 @@
   <meta name="description" content="Raíz y Rescate — learning, land, structures, and renewal for the era ahead." />
 </head>
 
+  <div class="pain-banner">
+  <div class="pain-banner-inner">
+    <span class="pain-banner-en">
+      <span class="pain-banner-label">Begin here —</span>
+      <a href="{{ '/our-pain' | relative_url }}" class="pain-link">Our Pain</a>
+      <span class="pain-banner-sub">We can only build a new world by seeing what lies beneath. We don't have to be finished with the process to begin. We just need to be in it.</span>
+    </span>
+    <span class="pain-banner-es" style="display:none">
+      <span class="pain-banner-label">Empieza aquí —</span>
+      <a href="{{ '/our-pain' | relative_url }}" class="pain-link">Nuestro Dolor</a>
+      <span class="pain-banner-sub">Solo podemos construir un mundo nuevo viendo lo que yace debajo. No tenemos que haber terminado el proceso para empezar. Solo necesitamos estar en él.</span>
+    </span>
+  </div>
+</div>
+
+<style>
+.pain-banner {
+  background: #1e1208;
+  border-bottom: 1px solid rgba(200,131,42,0.25);
+  padding: 1.2rem clamp(1.2rem, 4vw, 3rem);
+  position: relative;
+  overflow: hidden;
+}
+.pain-banner::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #c8832a;
+}
+.pain-banner-inner {
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.8rem;
+  font-family: inherit;
+}
+.pain-banner-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7a4f2a;
+}
+.pain-link {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  font-style: italic;
+  font-weight: 600;
+  color: #c8832a;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200,131,42,0.4);
+  transition: color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.pain-link:hover {
+  color: #e8c060;
+  border-color: rgba(232,192,96,0.6);
+}
+.pain-banner-sub {
+  font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+  color: #b5a48a;
+  line-height: 1.6;
+  font-style: italic;
+}
+@media(max-width: 600px) {
+  .pain-banner-inner { flex-direction: column; gap: 0.3rem; }
+}
+</style>
+
+<script>
+/* sync with your existing EN/ES toggle */
+(function(){
+  function syncBanner() {
+    var lang = document.body.classList.contains('lang-es') ? 'es' : 'en';
+    var en = document.querySelector('.pain-banner-en');
+    var es = document.querySelector('.pain-banner-es');
+    if (!en || !es) return;
+    en.style.display = lang === 'en' ? '' : 'none';
+    es.style.display = lang === 'es' ? '' : 'none';
+  }
+  /* watch for class changes on body (when toggle fires) */
+  var obs = new MutationObserver(syncBanner);
+  obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  /* also run on load */
+  document.addEventListener('DOMContentLoaded', syncBanner);
+  syncBanner();
+})();
+</script>
 <body>
   <div class="container">
 
