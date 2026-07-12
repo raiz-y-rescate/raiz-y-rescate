@@ -1,1 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Pain / Nuestro Dolor — Raíz y Rescate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --soil:   #150e06;
+      --bark:   #261608;
+      --deep:   #1e1208;
+      --amber:  #c8832a;
+      --ochre:  #d4a043;
+      --gold:   #e8c060;
+      --dusk:   #7a4f2a;
+      --cream:  #f0e8d5;
+      --bone:   #e2d3b8;
+      --mist:   #b5a48a;
+      --shadow: #6b5640;
+      --blood:  #8b2c1a;
+      --rose:   #b05060;
+      --moss:   #3d5c3a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--soil);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-bar {
+      position: fixed;
+      top: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--bark);
+      border-bottom: 1px solid rgba(200,131,42,0.15);
+      border-left: 1px solid rgba(200,131,42,0.15);
+    }
+    .lang-bar a {
+      display: block;
+      padding: 0.55rem 1rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--shadow);
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .lang-bar a.active { color: var(--amber); }
+    .lang-bar span { color: rgba(200,131,42,0.25); font-size: 0.6rem; }
+
+    /* ── NAV BACK ── */
+    .nav-back {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 500;
+      background: var(--bark);
+      border-bottom: 1px solid rgba(200,131,42,0.15);
+      border-right: 1px solid rgba(200,131,42,0.15);
+    }
+    .nav-back a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--shadow);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back a:hover { color: var(--amber); }
+
+    /* ── LANGUAGE LAYERS ── */
+    .en, .es { display: none; }
+    body.lang-en .en { display: block; }
+    body.lang-es .es { display: block; }
+    /* inline spans */
+    span.en, span.es { display: none; }
+    body.lang-en span.en { display: inline; }
+    body.lang-es span.es { display: inline; }
+
+    /* ── LAYOUT ── */
+    .section {
+      padding: clamp(4rem, 9vw, 9rem) clamp(1.5rem, 8vw, 7rem);
+      position: relative;
+    }
+    .max-w { max-width: 1100px; }
+    .max-w-text { max-width: 800px; }
+
+    .section-label {
+      font-size: 0.67rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 1px;
+      background: var(--amber);
+      opacity: 0.4;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2rem, 8vw, 8rem);
+      padding-top: calc(clamp(2rem,8vw,8rem) + 3rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 90% 70% at 65% 35%, rgba(200,131,42,0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 80% at 5%  85%, rgba(139,44,26,0.14)  0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 90% 90%, rgba(74,122,90,0.05)  0%, transparent 60%),
+        linear-gradient(165deg, var(--soil) 0%, var(--bark) 100%);
+    }
+
+    .ring {
+      position: absolute; right: -4vw; top: 50%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      border: 1px solid rgba(200,131,42,0.12);
+      animation: breathe 7s ease-in-out infinite;
+    }
+    .ring:nth-child(2){ width:clamp(280px,48vw,660px); height:clamp(280px,48vw,660px); }
+    .ring:nth-child(3){ width:clamp(200px,35vw,480px); height:clamp(200px,35vw,480px); border-color:rgba(200,131,42,0.07); animation-delay:2.3s; }
+    .ring:nth-child(4){ width:clamp(120px,22vw,300px); height:clamp(120px,22vw,300px); border-color:rgba(200,131,42,0.04); animation-delay:4.5s; }
+    @keyframes breathe {
+      0%,100%{ transform:translateY(-50%) scale(1);   opacity:1; }
+      50%    { transform:translateY(-50%) scale(1.05); opacity:0.5; }
+    }
+
+    .hero-content { position:relative; z-index:2; max-width:760px; }
+
+    .overline {
+      font-size: clamp(0.62rem,1.1vw,0.78rem);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: rise 1s ease 0.3s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem,12vw,11rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      opacity: 0;
+      animation: rise 1s ease 0.55s forwards;
+    }
+    .hero h1 em { font-style:normal; color:var(--amber); display:block; }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem,2.3vw,1.55rem);
+      font-style: italic;
+      color: var(--mist);
+      line-height: 1.75;
+      margin-top: 2.2rem;
+      max-width: 580px;
+      opacity: 0;
+      animation: rise 1s ease 0.85s forwards;
+    }
+
+    .scroll-cue {
+      margin-top: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: rise 1s ease 1.3s forwards;
+    }
+    .scroll-cue span { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--dusk); }
+    .scroll-line { height:1px; background:var(--amber); animation: grow-line 1.8s ease 1.6s both; }
+    @keyframes grow-line { from{width:0} to{width:55px} }
+    @keyframes rise {
+      from{ opacity:0; transform:translateY(22px); }
+      to  { opacity:1; transform:translateY(0);    }
+    }
+
+    /* ── INTRO ── */
+    .intro { background:var(--bark); border-top:1px solid rgba(200,131,42,0.18); }
+    .intro-grid {
+      display:grid;
+      grid-template-columns: 1fr 1.7fr;
+      gap: clamp(2.5rem,6vw,6rem);
+      align-items:start;
+    }
+    .intro-left h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2rem,4.5vw,3.8rem);
+      font-weight:300; line-height:1.18;
+      color:var(--cream);
+    }
+    .intro-left h2 strong { font-weight:600; color:var(--ochre); display:block; margin-top:0.2em; }
+    .intro-right p { font-size:clamp(1rem,1.55vw,1.13rem); line-height:1.95; color:var(--bone); margin-bottom:1.5rem; }
+    .intro-right p:last-child { margin-bottom:0; }
+
+    /* ── SCIENCE CARDS ── */
+    .science { background:var(--soil); }
+    .science-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:1.5px;
+      background:rgba(200,131,42,0.08);
+      border:1px solid rgba(200,131,42,0.1);
+    }
+    .sci-card {
+      background:var(--soil);
+      padding:clamp(2rem,4vw,3rem);
+      position:relative; overflow:hidden;
+      transition:background 0.4s;
+    }
+    .sci-card:hover { background:var(--bark); }
+    .sci-card::before {
+      content:attr(data-n);
+      position:absolute; top:-0.15em; right:0.2em;
+      font-family:'Bebas Neue',sans-serif; font-size:8rem;
+      color:rgba(200,131,42,0.05); line-height:1;
+      pointer-events:none; transition:color 0.4s;
+    }
+    .sci-card:hover::before { color:rgba(200,131,42,0.1); }
+    .sci-icon { font-size:1.7rem; margin-bottom:1.1rem; display:block; }
+    .sci-card h3 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.3rem,2.2vw,1.75rem);
+      letter-spacing:0.06em; color:var(--ochre); margin-bottom:0.9rem;
+    }
+    .sci-card p { font-size:clamp(0.88rem,1.35vw,0.98rem); line-height:1.9; color:var(--mist); }
+    .sci-card p + p { margin-top:0.8rem; }
+
+    /* ── PEOPLES ── */
+    .peoples { background:var(--bark); }
+    .people-block {
+      border-left:2px solid rgba(200,131,42,0.25);
+      padding-left:clamp(1.5rem,3vw,3rem);
+      margin-bottom:5rem;
+      max-width:900px;
+    }
+    .people-block:last-child { margin-bottom:0; }
+    .people-block .tag {
+      font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase;
+      color:var(--amber); margin-bottom:1rem; display:block;
+    }
+    .people-block h3 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.7rem,3.5vw,2.8rem);
+      font-weight:400; line-height:1.2; color:var(--cream); margin-bottom:1.8rem;
+    }
+    .people-block h3 em { font-style:italic; color:var(--ochre); }
+    .people-block p { font-size:clamp(1rem,1.55vw,1.12rem); line-height:1.95; color:var(--bone); margin-bottom:1.4rem; }
+    .people-block p:last-child { margin-bottom:0; }
+    .gift-note {
+      margin-top:2rem; padding:1.4rem 1.8rem;
+      background:rgba(200,131,42,0.06);
+      border-left:2px solid var(--amber);
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:clamp(1rem,1.7vw,1.2rem);
+      color:var(--ochre); line-height:1.7;
+    }
+
+    /* ── INTERLUDE ── */
+    .interlude {
+      padding:clamp(4rem,8vw,7rem) clamp(1.5rem,8vw,7rem);
+      background:linear-gradient(135deg,var(--deep) 0%,var(--bark) 100%);
+      border-top:1px solid rgba(200,131,42,0.12);
+      border-bottom:1px solid rgba(200,131,42,0.12);
+      text-align:center;
+    }
+    .interlude blockquote {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.4rem,3.2vw,2.6rem);
+      font-style:italic; font-weight:300; line-height:1.55;
+      color:var(--cream); max-width:860px; margin:0 auto 1.4rem;
+    }
+    .interlude blockquote em { font-style:normal; color:var(--amber); }
+    .interlude cite { font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--dusk); font-style:normal; }
+
+    /* ── PATTERN / CYCLE ── */
+    .pattern { background:var(--soil); }
+    .pattern-inner { max-width:920px; }
+    .pattern-inner > h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.9rem,4vw,3.2rem);
+      font-weight:300; line-height:1.3; color:var(--cream); margin-bottom:2.8rem;
+    }
+    .pattern-inner > h2 span { color:var(--ochre); }
+    .cycle-wrap { display:flex; flex-wrap:wrap; align-items:center; gap:0; margin:2.5rem 0 3.5rem; }
+    .c-step {
+      background:rgba(200,131,42,0.07);
+      border:1px solid rgba(200,131,42,0.18);
+      padding:0.9rem 1.3rem; font-size:0.86rem;
+      font-weight:400; letter-spacing:0.04em; color:var(--bone);
+    }
+    .c-arrow { color:var(--amber); font-size:1.1rem; padding:0 0.45rem; opacity:0.55; }
+    .pattern-inner > p { font-size:clamp(1rem,1.55vw,1.12rem); line-height:1.95; color:var(--bone); margin-bottom:1.5rem; }
+    .pattern-inner > p em { font-style:italic; color:var(--ochre); }
+    .pattern-inner > p strong { color:var(--cream); font-weight:400; }
+
+    /* ── SOUL ── */
+    .soul { background:var(--bark); }
+    .soul-inner { max-width:920px; }
+    .soul-inner h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2rem,4vw,3.2rem);
+      font-weight:300; line-height:1.25; color:var(--cream); margin-bottom:2.5rem;
+    }
+    .soul-inner h2 em { font-style:italic; color:var(--ochre); }
+    .soul-inner > p { font-size:clamp(1rem,1.55vw,1.12rem); line-height:1.95; color:var(--bone); margin-bottom:1.4rem; }
+    .soul-cols { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,5rem); margin-top:3rem; }
+    .soul-col h4 { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.08em; color:var(--amber); margin-bottom:1rem; }
+    .soul-col p { font-size:clamp(0.92rem,1.45vw,1.05rem); line-height:1.9; color:var(--bone); margin-bottom:1.1rem; }
+    .soul-col p:last-child { margin-bottom:0; }
+
+    /* ── HEALING ── */
+    .healing { background:var(--soil); }
+    .healing-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(2.5rem,6vw,6rem); align-items:start; max-width:1050px; }
+    .healing-left > .lead {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.15rem,2.1vw,1.55rem); font-style:italic;
+      line-height:1.72; color:var(--cream); margin-bottom:2rem;
+    }
+    .h-list { list-style:none; }
+    .h-list li { padding:1.1rem 0; border-bottom:1px solid rgba(200,131,42,0.12); font-size:clamp(0.92rem,1.45vw,1.03rem); color:var(--bone); line-height:1.8; display:flex; gap:1rem; align-items:flex-start; }
+    .h-list li::before { content:'—'; color:var(--amber); flex-shrink:0; margin-top:0.05em; }
+    .healing-right { background:rgba(200,131,42,0.05); border:1px solid rgba(200,131,42,0.12); padding:clamp(1.8rem,3vw,2.8rem); }
+    .healing-right h3 { font-family:'Bebas Neue',sans-serif; font-size:1.45rem; letter-spacing:0.08em; color:var(--amber); margin-bottom:1.3rem; }
+    .healing-right p { font-size:clamp(0.9rem,1.4vw,1rem); line-height:1.9; color:var(--mist); margin-bottom:1rem; }
+    .healing-right p:last-child { margin-bottom:0; }
+
+    /* ── ONE CONSCIOUSNESS ── */
+    .one { background:var(--bark); border-top:1px solid rgba(200,131,42,0.15); }
+    .one-inner { max-width:860px; }
+    .one-inner h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4.5vw,3.5rem); font-weight:300; line-height:1.2; color:var(--cream); margin-bottom:2.5rem; }
+    .one-inner h2 em { color:var(--amber); font-style:italic; }
+    .one-inner p { font-size:clamp(1rem,1.6vw,1.15rem); line-height:1.95; color:var(--bone); margin-bottom:1.5rem; }
+    .one-inner p:last-child { margin-bottom:0; }
+    .one-inner p em { color:var(--ochre); font-style:italic; }
+
+    /* ── CLOSING ── */
+    .closing {
+      min-height:65vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+      padding:clamp(5rem,10vw,10rem) clamp(1.5rem,8vw,7rem);
+      background:linear-gradient(180deg,var(--soil) 0%,var(--bark) 100%);
+      position:relative; overflow:hidden;
+    }
+    .closing::before {
+      content:''; position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:min(700px,90vw); height:min(700px,90vw);
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(200,131,42,0.06) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .closing h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.8rem,4vw,3.3rem);
+      font-weight:300; font-style:italic; line-height:1.45;
+      color:var(--cream); max-width:820px; margin-bottom:2rem; position:relative;
+    }
+    .closing h2 em { font-style:normal; color:var(--amber); }
+    .closing p { font-size:clamp(0.98rem,1.6vw,1.12rem); color:var(--mist); max-width:600px; line-height:1.95; position:relative; margin-bottom:1.2rem; }
+    .closing .final-line { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,2vw,1.4rem); color:var(--amber); margin-top:1.5rem; position:relative; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding:2rem clamp(1.5rem,8vw,7rem);
+      border-top:1px solid rgba(200,131,42,0.1);
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:wrap; gap:1rem; background:var(--soil);
+    }
+    footer span { font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--dusk); }
+    footer em { font-style:normal; color:var(--amber); }
+    footer a { color:var(--dusk); text-decoration:none; transition:color 0.2s; }
+    footer a:hover { color:var(--amber); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.85s ease, transform 0.85s ease; }
+    .reveal.on { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:0.1s;} .d2{transition-delay:0.22s;}
+    .d3{transition-delay:0.36s;} .d4{transition-delay:0.52s;} .d5{transition-delay:0.68s;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:720px){
+      .intro-grid,.healing-grid,.soul-cols{grid-template-columns:1fr;}
+      .cycle-wrap{flex-direction:column;align-items:flex-start;}
+      .c-arrow{transform:rotate(90deg);padding:0.3rem 0;}
+    }
+  </style>
+</head>
+<body class="lang-en">
+
+<!-- LANG TOGGLE -->
+<div class="lang-bar">
+  <a id="btn-en" class="active" onclick="setLang('en')">EN</a>
+  <span>·</span>
+  <a id="btn-es" onclick="setLang('es')">ES</a>
+</div>
+
+<!-- BACK NAV -->
+<div class="nav-back">
+  <a href="https://raiz-y-rescate.github.io/raiz-y-rescate/">
+    ← Raíz y Rescate
+  </a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="hero-content">
+    <p class="overline">
+      <span class="en">Raíz y Rescate · First Things First</span>
+      <span class="es">Raíz y Rescate · Lo Primero es lo Primero</span>
+    </p>
+    <h1>
+      <span class="en">Our<em>Pain.</em></span>
+      <span class="es">Nuestro<em>Dolor.</em></span>
+    </h1>
+    <p class="hero-sub en">
+      We can only build a new world by seeing — truly seeing — what lies beneath. 
+      We don't have to be finished with the process to begin building. 
+      We just need to be in it.
+    </p>
+    <p class="hero-sub es">
+      Solo podemos construir un mundo nuevo al ver — verdaderamente ver — lo que yace debajo. 
+      No tenemos que haber terminado el proceso para empezar a construir. 
+      Solo necesitamos estar en él.
+    </p>
+    <div class="scroll-cue">
+      <div class="scroll-line"></div>
+      <span class="en">Begin here</span>
+      <span class="es">Comienza aquí</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ INTRO ══ -->
+<section class="section intro">
+  <div class="section-label">
+    <span class="en">The Foundation</span>
+    <span class="es">El Fundamento</span>
+  </div>
+  <div class="intro-grid max-w">
+    <div class="intro-left reveal">
+      <h2 class="en">We are organisms walking around<strong>in inherited pain.</strong></h2>
+      <h2 class="es">Somos organismos que caminamos<strong>cargando dolor heredado.</strong></h2>
+    </div>
+    <div class="intro-right">
+      <p class="reveal d1 en">Not metaphorically. <em>Biologically.</em> The science of epigenetics has confirmed what our grandmothers always knew in their bodies: what happens to a people does not end with that generation. It is chemically written into the very code of their cells — and passed forward to children who were never there, who were never told, who have no conscious memory of it at all.</p>
+      <p class="reveal d1 es">No metafóricamente. <em>Biológicamente.</em> La ciencia de la epigenética ha confirmado lo que nuestras abuelas siempre supieron en sus cuerpos: lo que le ocurre a un pueblo no termina con esa generación. Queda escrito químicamente en el código mismo de sus células — y se transmite a hijos que nunca estuvieron ahí, que nunca fueron informados, que no tienen ningún recuerdo consciente de ello.</p>
+
+      <p class="reveal d2 en">The descendants of enslaved Africans carry altered stress-response systems in their DNA. The children of Holocaust survivors show the same cortisol abnormalities as their parents — without ever having seen a camp. Indigenous children carry the nervous system signature of genocide in their cells. Women carry ten thousand years of silencing in their bodies. <em>The body remembers what the conscious mind has never experienced.</em></p>
+      <p class="reveal d2 es">Los descendientes de africanos esclavizados llevan sistemas de respuesta al estrés alterados en su ADN. Los hijos de sobrevivientes del Holocausto muestran las mismas anomalías de cortisol que sus padres — sin haber visto jamás un campo. Los niños indígenas llevan en sus células la firma del genocidio. Las mujeres cargan diez mil años de silenciamiento en sus cuerpos. <em>El cuerpo recuerda lo que la mente consciente nunca experimentó.</em></p>
+
+      <p class="reveal d3 en">This is not weakness. This is biology doing exactly what it was designed to do: protect the next generation by sending them pre-alarmed into a dangerous world. The tragedy is that the war ended — but the alarm did not. And so we walk through our lives braced for a blow that already fell on someone else.</p>
+      <p class="reveal d3 es">Esto no es debilidad. Es la biología haciendo exactamente lo que fue diseñada para hacer: proteger a la siguiente generación enviándola pre-alarmada a un mundo peligroso. La tragedia es que la guerra terminó — pero la alarma no. Y así caminamos por la vida preparados para un golpe que ya cayó sobre otra persona.</p>
+
+      <p class="reveal d4 en">This page asks you to sit with that truth. Not to despair — but to finally <em>see it clearly.</em> Because you cannot heal what you cannot name. And you cannot rescue what you do not first understand.</p>
+      <p class="reveal d4 es">Esta página te invita a sentarte con esa verdad. No para desesperarte — sino para finalmente <em>verla con claridad.</em> Porque no puedes sanar lo que no puedes nombrar. Y no puedes rescatar lo que primero no comprendes.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ SCIENCE ══ -->
+<section class="section science">
+  <div class="section-label">
+    <span class="en">The Mechanics — How Pain Travels</span>
+    <span class="es">La Mecánica — Cómo Viaja el Dolor</span>
+  </div>
+  <div class="science-grid max-w">
+
+    <div class="sci-card reveal" data-n="1">
+      <span class="sci-icon">🧬</span>
+      <h3><span class="en">Epigenetics</span><span class="es">Epigenética</span></h3>
+      <p class="en">Trauma causes chemical tags — called methylation — to attach to our DNA. These tags switch genes on or off — genes governing fear response, threat detection, cortisol regulation, and inflammation.</p>
+      <p class="es">El trauma provoca que etiquetas químicas — llamadas metilación — se adhieran a nuestro ADN. Estas etiquetas activan o desactivan genes que gobiernan la respuesta al miedo, la detección de amenazas y la regulación del cortisol.</p>
+      <p class="en">These tags are heritable. A child can be born with genes already switched into survival mode — pre-alarmed for a danger that ended before they drew their first breath. This is not fate. But it is the starting condition. And it explains everything.</p>
+      <p class="es">Estas etiquetas son heredables. Un niño puede nacer con genes ya activados en modo supervivencia — pre-alarmado para un peligro que terminó antes de que diera su primer respiro. Esto no es destino. Pero es la condición de partida. Y lo explica todo.</p>
+    </div>
+
+    <div class="sci-card reveal d1" data-n="2">
+      <span class="sci-icon">⚡</span>
+      <h3><span class="en">The Nervous System</span><span class="es">El Sistema Nervioso</span></h3>
+      <p class="en">We live in two primary states. <em>Sympathetic</em> — fight, flight, freeze — is survival mode. <em>Parasympathetic</em> — rest, digest, connect — is where full humanity lives. Creativity, empathy, love, wisdom are only accessible from the second state.</p>
+      <p class="es">Vivimos en dos estados principales. El <em>simpático</em> — lucha, huida, parálisis — es el modo supervivencia. El <em>parasimpático</em> — descanso, digestión, conexión — es donde vive la plena humanidad. Creatividad, empatía, amor, sabiduría solo son accesibles desde el segundo estado.</p>
+      <p class="en">Generational trauma can lock entire communities in sympathetic overdrive for generations. The prefrontal cortex of a people goes offline. They operate from pure primal survival — and are then blamed for it.</p>
+      <p class="es">El trauma generacional puede bloquear comunidades enteras en el modo simpático durante generaciones. La corteza prefrontal de un pueblo se desconecta. Operan desde la supervivencia primal pura — y luego son culpados por ello.</p>
+    </div>
+
+    <div class="sci-card reveal d2" data-n="3">
+      <span class="sci-icon">🔄</span>
+      <h3><span class="en">The Transfer of Pain</span><span class="es">La Transferencia del Dolor</span></h3>
+      <p class="en">Unprocessed pain does not disappear. It converts. When a person — or a people — cannot bear to feel what happened to them, the pain does not dissolve. It becomes armor. It becomes aggression. It becomes the need to have someone beneath you.</p>
+      <p class="es">El dolor no procesado no desaparece. Se convierte. Cuando una persona — o un pueblo — no puede soportar sentir lo que le ocurrió, el dolor no se disuelve. Se convierte en armadura. En agresión. En la necesidad de tener a alguien por debajo de ti.</p>
+      <p class="en">Hurt people hurt people. Not because they are evil. Because they are <em>full</em> — of something that was never allowed to be expressed, witnessed, mourned, or healed.</p>
+      <p class="es">Las personas heridas hieren a otras personas. No porque sean malas. Porque están <em>llenas</em> — de algo que nunca se les permitió expresar, presenciar, llorar o sanar.</p>
+    </div>
+
+    <div class="sci-card reveal d3" data-n="4">
+      <span class="sci-icon">🪞</span>
+      <h3><span class="en">Pain Turned Inward</span><span class="es">El Dolor Hacia Adentro</span></h3>
+      <p class="en">When a people cannot safely direct pain at its true source — a system too large, a history too diffuse — the pain collapses inward. You hurt those closest to you. You police your own. You enforce among yourselves the hierarchy that was imposed on you from outside.</p>
+      <p class="es">Cuando un pueblo no puede dirigir el dolor de forma segura hacia su verdadera fuente — un sistema demasiado grande, una historia demasiado difusa — el dolor colapsa hacia adentro. Hieres a los que tienes más cerca. Controlas a los tuyos. Impones entre ustedes la jerarquía que te fue impuesta desde afuera.</p>
+      <p class="en">The colonizer no longer has to do the work. The programming runs on its own. This is not a character flaw. It is the most predictable outcome of sustained, unwitnessed oppression.</p>
+      <p class="es">El colonizador ya no tiene que hacer el trabajo. La programación corre sola. Esto no es un defecto de carácter. Es el resultado más predecible de una opresión sostenida y no reconocida.</p>
+    </div>
+
+    <div class="sci-card reveal" data-n="5">
+      <span class="sci-icon">🌿</span>
+      <h3><span class="en">The Collective Unconscious</span><span class="es">El Inconsciente Colectivo</span></h3>
+      <p class="en">Carl Jung identified a shared psychic inheritance beneath individual consciousness — archetypes, fears, patterns, memories — that entire peoples carry together without knowing it. Entire peoples can carry a collective inner wound: <em>"We are not safe." "We must dominate before we are dominated."</em> Until named, it runs everything.</p>
+      <p class="es">Carl Jung identificó una herencia psíquica compartida bajo la conciencia individual — arquetipos, miedos, patrones, memorias — que pueblos enteros cargan juntos sin saberlo. Pueblos enteros pueden llevar una herida interior colectiva: <em>"No estamos seguros." "Debemos dominar antes de ser dominados."</em> Hasta que se nombra, lo dirige todo.</p>
+    </div>
+
+    <div class="sci-card reveal d1" data-n="6">
+      <span class="sci-icon">💎</span>
+      <h3><span class="en">The Gift Inside the Pain</span><span class="es">El Don Dentro del Dolor</span></h3>
+      <p class="en">The same nervous system intensity that produces trauma also forges extraordinary gifts. Creativity born from survival. Spiritual depth carved from suffering. Music, rhythm, communal care — these are biological adaptations, tools the nervous system built to regulate itself under impossible pressure.</p>
+      <p class="es">La misma intensidad del sistema nervioso que produce trauma también forja dones extraordinarios. Creatividad nacida de la supervivencia. Profundidad espiritual tallada del sufrimiento. Música, ritmo, cuidado comunitario — son adaptaciones biológicas, herramientas que el sistema nervioso construyó para regularse bajo una presión imposible.</p>
+      <p class="en">The gifts were always there. The alarm simply needed to stop.</p>
+      <p class="es">Los dones siempre estuvieron ahí. La alarma simplemente necesitaba detenerse.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ INTERLUDE 1 ══ -->
+<div class="interlude reveal">
+  <blockquote class="en">
+    "Before we ask <em>why are they like this</em> — we must first ask what was done to them, 
+    and whether anyone has ever truly <em>sat with them in it.</em>"
+  </blockquote>
+  <blockquote class="es">
+    "Antes de preguntar <em>por qué son así</em> — primero debemos preguntar qué les hicieron, 
+    y si alguien alguna vez verdaderamente <em>se sentó con ellos en eso.</em>"
+  </blockquote>
+  <cite class="en">The first question of healing</cite>
+  <cite class="es">La primera pregunta de la sanación</cite>
+</div>
+
+
+<!-- ══ PEOPLES ══ -->
+<section class="section peoples">
+  <div class="section-label">
+    <span class="en">The Wounds of Every People</span>
+    <span class="es">Las Heridas de Cada Pueblo</span>
+  </div>
+
+  <!-- EUROPEANS -->
+  <div class="people-block">
+    <span class="tag en">The Origin of the Colonizer</span>
+    <span class="tag es">El Origen del Colonizador</span>
+    <h3 class="reveal en">The Europeans — <em>what was done to them first</em></h3>
+    <h3 class="reveal es">Los Europeos — <em>lo que les hicieron primero</em></h3>
+    <p class="reveal d1 en">This is the history almost no one tells. Before Europeans became colonizers, they were among the most brutalized peoples on earth — and understanding this is not an excuse for what they went on to do. It is the diagnosis that explains how it happened.</p>
+    <p class="reveal d1 es">Esta es la historia que casi nadie cuenta. Antes de que los europeos se convirtieran en colonizadores, estaban entre los pueblos más brutalizados de la tierra — y entender esto no es una excusa por lo que hicieron después. Es el diagnóstico que explica cómo ocurrió.</p>
+    <p class="reveal d2 en">For centuries, the feudal system ground peasant populations into near-slavery. Lords owned the land, the labor, the bodies of the people who worked it. A peasant who fled could be hunted and returned. The Church built a theology of submission — <em>you suffer here so you may be rewarded in heaven</em> — which was, in practice, a spiritual mechanism for keeping broken people from revolting.</p>
+    <p class="reveal d2 es">Durante siglos, el sistema feudal molió a las poblaciones campesinas en una cuasi-esclavitud. Los señores poseían la tierra, el trabajo, los cuerpos de quienes la trabajaban. Un campesino que huía podía ser cazado y devuelto. La Iglesia construyó una teología de sumisión — <em>sufres aquí para ser recompensado en el cielo</em> — que era, en la práctica, un mecanismo espiritual para evitar que personas rotas se rebelaran.</p>
+    <p class="reveal d3 en">The Enclosures — the systematic theft of common land across Britain and Europe from the 15th to 19th centuries — forcibly displaced millions of rural people from their ancestral homelands, drove them into factories, and stripped them of their identity, their community, their relationship to the earth. An entire people lost their <em>raíz.</em></p>
+    <p class="reveal d3 es">Los Cercamientos — el robo sistemático de tierras comunes en Gran Bretaña y Europa entre los siglos XV y XIX — desplazaron forzosamente a millones de personas rurales de sus tierras ancestrales, las empujaron a las fábricas y les arrebataron su identidad, su comunidad, su relación con la tierra. Un pueblo entero perdió su <em>raíz.</em></p>
+    <p class="reveal d4 en">The witch trials of the 15th through 17th centuries systematically destroyed the knowledge-keepers of European peasant communities — healers, midwives, women who knew the land and the medicine of plants. An estimated 40,000 to 100,000 people executed. What was burned was not just bodies. It was centuries of accumulated healing knowledge, and the severing of entire communities from the feminine, from the earth, from intuitive knowing.</p>
+    <p class="reveal d4 es">Los juicios de brujas de los siglos XV al XVII destruyeron sistemáticamente a las guardianas del conocimiento de las comunidades campesinas europeas — curanderas, parteras, mujeres que conocían la tierra y la medicina de las plantas. Entre 40,000 y 100,000 personas ejecutadas. Lo que se quemó no fueron solo cuerpos. Fueron siglos de conocimiento sanador acumulado, y la separación de comunidades enteras de lo femenino, de la tierra, del saber intuitivo.</p>
+    <p class="reveal d5 en">Then came colonial expansion. And here is the crucial insight: these were not confident, whole people going out to conquer the world. These were <em>traumatized, displaced, humiliated people</em> who suddenly found themselves with ships, weapons, and people they could declare less-than-human. The relief must have been intoxicating. For the first time, someone was beneath them. The unbearable pressure of their own humiliation finally had somewhere to go.</p>
+    <p class="reveal d5 es">Luego llegó la expansión colonial. Y aquí está la comprensión crucial: no eran personas seguras y completas saliendo a conquistar el mundo. Eran <em>personas traumatizadas, desplazadas, humilladas</em> que de repente se encontraron con barcos, armas y personas a quienes podían declarar menos que humanas. El alivio debió haber sido embriagador. Por primera vez, alguien estaba por debajo de ellos. La insoportable presión de su propia humillación finalmente tenía a dónde ir.</p>
+    <div class="gift-note reveal d2">
+      <span class="en">The European peasant, before his dispossession, lived close to the earth — with festivals and folk medicine and deep community bonds and songs that held his grief. That person was destroyed long before he became the colonizer. <strong>The colonizer was the wound wearing a sword.</strong></span>
+      <span class="es">El campesino europeo, antes de su despojo, vivía cerca de la tierra — con festividades y medicina popular y profundos lazos comunitarios y canciones que contenían su dolor. Esa persona fue destruida mucho antes de convertirse en colonizador. <strong>El colonizador era la herida portando una espada.</strong></span>
+    </div>
+  </div>
+
+  <!-- BLACK -->
+  <div class="people-block">
+    <span class="tag en">Resilience Under the Unthinkable</span>
+    <span class="tag es">Resiliencia Ante lo Impensable</span>
+    <h3 class="reveal en">The African Diaspora — <em>genius in the middle of catastrophe</em></h3>
+    <h3 class="reveal es">La Diáspora Africana — <em>genialidad en medio de la catástrofe</em></h3>
+    <p class="reveal d1 en">The transatlantic slave trade forcibly removed approximately 12 to 15 million human beings from their homelands over 400 years. Families separated on auction blocks. Names stripped and replaced. Languages forbidden. Religions suppressed. The very memory of origin targeted for erasure.</p>
+    <p class="reveal d1 es">La trata transatlántica de esclavos desplazó forzosamente a aproximadamente 12 a 15 millones de seres humanos de sus tierras natales durante 400 años. Familias separadas en bloques de subasta. Nombres despojados y reemplazados. Idiomas prohibidos. Religiones suprimidas. La misma memoria del origen fue blanco de borrado.</p>
+    <p class="reveal d2 en">And then — having survived all of that — Black people in America faced Reconstruction promises broken, Jim Crow, lynching as public spectacle, redlining, mass incarceration, and a daily environment of threat that has never fully ended. The nervous system of a Black person in America has never had the opportunity to fully exhale. Generation after generation, the alarm has been kept ringing.</p>
+    <p class="reveal d2 es">Y luego — habiendo sobrevivido todo eso — los negros en América enfrentaron promesas de Reconstrucción rotas, Jim Crow, linchamientos como espectáculo público, líneas de segregación, encarcelamiento masivo y un entorno diario de amenaza que nunca ha terminado completamente. El sistema nervioso de una persona negra en América nunca ha tenido la oportunidad de exhalar completamente. Generación tras generación, la alarma ha seguido sonando.</p>
+    <p class="reveal d3 en">The epigenetic impact is now measurable — altered cortisol regulation, heightened inflammatory response, shortened telomeres, accelerated biological aging in Black Americans compared to white Americans of the same socioeconomic status. This is racism measured in cells.</p>
+    <p class="reveal d3 es">El impacto epigenético ahora es medible — regulación de cortisol alterada, respuesta inflamatoria elevada, telómeros acortados, envejecimiento biológico acelerado en los negros americanos en comparación con los blancos americanos del mismo nivel socioeconómico. Esto es el racismo medido en células.</p>
+    <p class="reveal d4 en">When Black men and women tear each other apart — this is not a character failure. This is the final expression of a wound that had nowhere else to go. The pain was poured into a container that was then sealed. It went inward. It went toward the people close enough to reach. The colonizer no longer has to do the work.</p>
+    <p class="reveal d4 es">Cuando los hombres y mujeres negros se destrozan entre sí — esto no es un fracaso de carácter. Es la expresión final de una herida que no tenía a dónde más ir. El dolor fue vertido en un recipiente que luego fue sellado. Fue hacia adentro. Fue hacia las personas lo suficientemente cercanas para alcanzarlas. El colonizador ya no tiene que hacer el trabajo.</p>
+    <div class="gift-note reveal d2">
+      <span class="en">And yet — jazz. Gospel. The blues. Hip hop. The Harlem Renaissance. Athletes of impossible grace. Children who seem to arrive in the world already musical, already radiant. The communal care that held entire communities together under conditions that would have shattered less resilient peoples. The gifts of the African diaspora are proof that something essential was never broken.</span>
+      <span class="es">Y aún así — el jazz. El gospel. El blues. El hip hop. El Renacimiento de Harlem. Atletas de una gracia imposible. Niños que parecen llegar al mundo ya musicales, ya radiantes. El cuidado comunitario que mantuvo unidas a comunidades enteras bajo condiciones que habrían destrozado a pueblos menos resilientes. Los dones de la diáspora africana son prueba de que algo esencial nunca fue quebrado.</span>
+    </div>
+  </div>
+
+  <!-- INDIGENOUS / MEXICAN -->
+  <div class="people-block">
+    <span class="tag en">La Herida de la Mestiza</span>
+    <span class="tag es">La Herida de la Mestiza</span>
+    <h3 class="reveal en">The Indigenous & Mexican Soul — <em>the wound of two worlds</em></h3>
+    <h3 class="reveal es">El Alma Indígena y Mexicana — <em>la herida de dos mundos</em></h3>
+    <p class="reveal d1 en">The Indigenous peoples of the Americas lived in complex, sophisticated civilizations for thousands of years — with advanced astronomy, agriculture, medicine, architecture, philosophy, and rich spiritual traditions intimately tied to the land and the cycles of life. That world was not primitive. It was <em>ancient and complete.</em></p>
+    <p class="reveal d1 es">Los pueblos indígenas de las Américas vivieron en civilizaciones complejas y sofisticadas durante miles de años — con astronomía avanzada, agricultura, medicina, arquitectura, filosofía y ricas tradiciones espirituales íntimamente ligadas a la tierra y los ciclos de la vida. Ese mundo no era primitivo. Era <em>antiguo y completo.</em></p>
+    <p class="reveal d2 en">Within a century of European contact, an estimated 90% of the Indigenous population had died — from disease, forced labor, deliberate massacre, starvation, and the destruction of entire ways of life. Temples were torn down and cathedrals built on the rubble — literally using the same stones. Sacred codices were burned in great bonfires by bishops who called them the work of the devil. Centuries of astronomical knowledge, medical knowledge, spiritual understanding — gone in an afternoon's fire.</p>
+    <p class="reveal d2 es">En un siglo de contacto europeo, se estima que el 90% de la población indígena había muerto — por enfermedad, trabajo forzado, masacre deliberada, hambre y la destrucción de formas enteras de vida. Los templos fueron derribados y las catedrales construidas sobre los escombros — literalmente usando las mismas piedras. Los códices sagrados fueron quemados en grandes hogueras por obispos que los llamaban obra del diablo. Siglos de conocimiento astronómico, médico, espiritual — destruidos en el fuego de una tarde.</p>
+    <p class="reveal d3 en">And then came La Mestiza — born of a Spanish father and an Indigenous mother, so often through violence. Belonging to neither world fully. Too Indigenous for the Spanish. Too Spanish for the Indigenous. Gloria Anzaldúa called this <em>la herida abierta</em> — the open wound — the borderland state where two cultures, two bloods, two histories of violence meet inside a single body.</p>
+    <p class="reveal d3 es">Y luego llegó La Mestiza — nacida de padre español y madre indígena, con tanta frecuencia a través de la violencia. Sin pertenecer completamente a ninguno de los dos mundos. Demasiado indígena para los españoles. Demasiado española para los indígenas. Gloria Anzaldúa llamó a esto <em>la herida abierta</em> — el estado fronterizo donde dos culturas, dos sangres, dos historias de violencia se encuentran dentro de un solo cuerpo.</p>
+    <p class="reveal d4 en">The internalized hierarchy of <em>colorism</em> — lighter is better, European features more valued — is the colonizer's voice, still speaking inside the community centuries later. La Malinche — Malintzin — has been blamed for centuries for the conquest itself, a perfect example of how women become the scapegoat for the violence done by men in the same moment they were its first victim.</p>
+    <p class="reveal d4 es">La jerarquía interiorizada del <em>colorismo</em> — lo más claro es mejor, los rasgos europeos más valorados — es la voz del colonizador, aún hablando dentro de la comunidad siglos después. La Malinche — Malintzin — ha sido culpada durante siglos por la conquista misma, un ejemplo perfecto de cómo las mujeres se convierten en el chivo expiatorio de la violencia cometida por los hombres en el mismo momento en que fueron su primera víctima.</p>
+    <p class="reveal d5 en"><em>Marianismo</em> — the expectation that women be pure, self-sacrificing, endlessly giving, never complaining — is the spiritual architecture of female self-erasure. Taught as virtue. Functioning as a cage. A woman trained to disappear into service has been separated from her own interior life — her desires, her anger, her needs, her knowledge of herself.</p>
+    <p class="reveal d5 es"><em>El marianismo</em> — la expectativa de que las mujeres sean puras, abnegadas, siempre generosas, que nunca se quejen — es la arquitectura espiritual del autoborramiento femenino. Enseñado como virtud. Funcionando como jaula. Una mujer entrenada para desaparecer en el servicio ha sido separada de su propia vida interior — sus deseos, su enojo, sus necesidades, su conocimiento de sí misma.</p>
+    <div class="gift-note reveal d2">
+      <span class="en">And still — the corn. The hands that know how to make tortillas without measuring. The altar on Día de los Muertos, the marigolds, the photographs of the beloved dead. The curandera's knowledge that survived underground. The murals that made walls speak. The brown body's relationship to color, to earth, to sensory beauty. These are not traditions. They are the soul of a people that refused to be erased.</span>
+      <span class="es">Y aún — el maíz. Las manos que saben hacer tortillas sin medir. El altar en Día de los Muertos, los cempasúchiles, las fotografías de los amados difuntos. El conocimiento de la curandera que sobrevivió en la clandestinidad. Los murales que hicieron hablar a las paredes. La relación del cuerpo moreno con el color, con la tierra, con la belleza sensorial. Estas no son tradiciones. Son el alma de un pueblo que se negó a ser borrado.</span>
+    </div>
+  </div>
+
+  <!-- JEWISH -->
+  <div class="people-block">
+    <span class="tag en">Two Thousand Years of Persecution</span>
+    <span class="tag es">Dos Mil Años de Persecución</span>
+    <h3 class="reveal en">The Jewish People — <em>survival and its impossible cost</em></h3>
+    <h3 class="reveal es">El Pueblo Judío — <em>la supervivencia y su costo imposible</em></h3>
+    <p class="reveal d1 en">The Jewish experience of persecution is not an event. It is a pattern sustained across two thousand years. Expelled from England in 1290. From France in 1306. From Spain in 1492. Subject to pogroms across Russia, Ukraine, and Poland. And then the Holocaust — six million murdered in living memory, one third of the entire global Jewish population.</p>
+    <p class="reveal d1 es">La experiencia judía de persecución no es un evento. Es un patrón sostenido a lo largo de dos mil años. Expulsados de Inglaterra en 1290. De Francia en 1306. De España en 1492. Sujetos a pogromos en Rusia, Ucrania y Polonia. Y luego el Holocausto — seis millones asesinados en memoria viva, un tercio de toda la población judía mundial.</p>
+    <p class="reveal d2 en">The epigenetic research on Holocaust survivors is the most well-documented case of transgenerational trauma that science has produced. Their children — raised in safety, in love — nevertheless carry measurably altered stress hormones. The body passed the memory forward. The alarm stayed on. This is what two thousand years of being hunted does to a people's biology.</p>
+    <p class="reveal d2 es">La investigación epigenética sobre los sobrevivientes del Holocausto es el caso más documentado de trauma transgeneracional que la ciencia ha producido. Sus hijos — criados en seguridad, en amor — sin embargo llevan hormonas del estrés mediblemente alteradas. El cuerpo transmitió la memoria. La alarma permaneció encendida. Esto es lo que dos mil años de ser cazados le hace a la biología de un pueblo.</p>
+    <p class="reveal d3 en">And here is the tragedy that the pattern predicts: a people with the deepest documented experience of dispossession now administers a system that — whatever its justifications — produces dispossession in another people. This is not a political statement. It is the pattern, manifesting again. <em>Unwitnessed wound → pain with nowhere to go → someone else becomes the container.</em></p>
+    <p class="reveal d3 es">Y aquí está la tragedia que el patrón predice: un pueblo con la experiencia más documentada de despojo ahora administra un sistema que — cualesquiera sean sus justificaciones — produce despojo en otro pueblo. Esto no es una declaración política. Es el patrón, manifestándose de nuevo. <em>Herida no presenciada → dolor sin a dónde ir → alguien más se convierte en el recipiente.</em></p>
+    <div class="gift-note reveal d2">
+      <span class="en">The Jewish intellectual and creative contribution to human civilization — philosophy, science, literature, music, comedy, psychoanalysis — is wildly disproportionate to the community's size. This too is the gift inside the wound. The mind sharpened by millennia of having to be the smartest person in the room just to survive. The humor born from the only alternative being despair.</span>
+      <span class="es">La contribución intelectual y creativa judía a la civilización humana — filosofía, ciencia, literatura, música, comedia, psicoanálisis — es enormemente desproporcionada al tamaño de la comunidad. Este también es el don dentro de la herida. La mente afilada por milenios de tener que ser la persona más inteligente en la sala solo para sobrevivir. El humor nacido de que la única alternativa era la desesperación.</span>
+    </div>
+  </div>
+
+  <!-- WOMEN -->
+  <div class="people-block">
+    <span class="tag en">The Oldest Wound</span>
+    <span class="tag es">La Herida Más Antigua</span>
+    <h3 class="reveal en">Women — <em>ten thousand years of the body as territory</em></h3>
+    <h3 class="reveal es">Las Mujeres — <em>diez mil años del cuerpo como territorio</em></h3>
+    <p class="reveal d1 en">If epigenetics is correct — and the evidence says it is — then women carry in their bodies the longest unbroken chain of inherited trauma on earth. Not because women are weaker. Because the oppression of women is the oldest and most universal human system of domination ever constructed.</p>
+    <p class="reveal d1 es">Si la epigenética es correcta — y la evidencia dice que lo es — entonces las mujeres llevan en sus cuerpos la cadena más larga e ininterrumpida de trauma heredado en la tierra. No porque las mujeres sean más débiles. Porque la opresión de las mujeres es el sistema de dominación humano más antiguo y universal jamás construido.</p>
+    <p class="reveal d2 en">In nearly every civilization, the female body has been defined as property — of her father, her husband, her clan, her state, her god. The right to own land, move freely, speak publicly, practice medicine, refuse reproduction, choose a partner — denied across virtually every culture in recorded history. Not for a century. For millennia.</p>
+    <p class="reveal d2 es">En casi todas las civilizaciones, el cuerpo femenino ha sido definido como propiedad — de su padre, su esposo, su clan, su estado, su dios. El derecho a poseer tierra, moverse libremente, hablar públicamente, practicar la medicina, negarse a la reproducción, elegir pareja — negado en prácticamente todas las culturas de la historia registrada. No por un siglo. Por milenios.</p>
+    <p class="reveal d3 en">The witch trials were the systematic destruction of female authority — the burning of healers, midwives, herbalists, independent women, women who knew too much. What was killed was not just individuals. It was the archetype of the wise woman, and the entire cultural framework in which female knowledge and spiritual authority had any legitimate place. That erasure went deep into the collective unconscious of Western civilization — and into the bodies of every woman who came after.</p>
+    <p class="reveal d3 es">Los juicios de brujas fueron la destrucción sistemática de la autoridad femenina — la quema de curanderas, parteras, herbolarias, mujeres independientes, mujeres que sabían demasiado. Lo que fue asesinado no fue solo individuos. Fue el arquetipo de la mujer sabia y todo el marco cultural en el que el conocimiento femenino y la autoridad espiritual tenían algún lugar legítimo. Ese borrado fue profundo en el inconsciente colectivo de la civilización occidental — y en los cuerpos de cada mujer que vino después.</p>
+    <p class="reveal d4 en">Female bodies carry trauma in specific, documented ways. The pelvic floor holds fear. The throat holds silenced words. The chest holds grief that was never safe to express. The body of a woman who was told — directly or implicitly — that her feelings were too much, her voice was inappropriate, her anger was ugly, her needs were selfish — that body holds all of it. Compressed. Waiting.</p>
+    <p class="reveal d4 es">Los cuerpos femeninos llevan el trauma de maneras específicas y documentadas. El suelo pélvico sostiene el miedo. La garganta sostiene palabras silenciadas. El pecho sostiene el duelo que nunca fue seguro expresar. El cuerpo de una mujer a quien se le dijo — directa o implícitamente — que sus sentimientos eran demasiado, su voz inapropiada, su enojo era feo, sus necesidades eran egoístas — ese cuerpo lo sostiene todo. Comprimido. Esperando.</p>
+    <div class="gift-note reveal d2">
+      <span class="en">The intuition called "women's instinct" is not magic. It is the heightened perceptual sensitivity of a being who had to read the room perfectly in order to survive it. The emotional intelligence. The capacity to hold multiple truths at once. The deep relational knowing. These are not soft skills. They are survival technologies that the world now desperately needs — and is only beginning to recognize.</span>
+      <span class="es">La intuición llamada "instinto femenino" no es magia. Es la sensibilidad perceptual elevada de un ser que tenía que leer perfectamente el ambiente para poder sobrevivir en él. La inteligencia emocional. La capacidad de sostener múltiples verdades a la vez. El conocimiento relacional profundo. Estas no son habilidades blandas. Son tecnologías de supervivencia que el mundo necesita desesperadamente ahora — y apenas está comenzando a reconocer.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ INTERLUDE 2 ══ -->
+<div class="interlude reveal">
+  <blockquote class="en">
+    "The same fractal, across every people, every century. 
+    <em>Oppression. Humiliation. No space to grieve. Pain transferred forward.</em> 
+    The mechanism does not care whose body it moves through."
+  </blockquote>
+  <blockquote class="es">
+    "El mismo fractal, en todos los pueblos, en todos los siglos. 
+    <em>Opresión. Humillación. Sin espacio para el duelo. Dolor transferido hacia adelante.</em> 
+    El mecanismo no le importa a través de qué cuerpo se mueve."
+  </blockquote>
+  <cite class="en">The pattern that connects all suffering</cite>
+  <cite class="es">El patrón que conecta todo sufrimiento</cite>
+</div>
+
+
+<!-- ══ CYCLE ══ -->
+<section class="section pattern">
+  <div class="section-label">
+    <span class="en">Why We Keep Repeating</span>
+    <span class="es">Por Qué Seguimos Repitiendo</span>
+  </div>
+  <div class="pattern-inner">
+    <h2 class="reveal en">The same fractal, across every people, every century. <span>Look at it without flinching.</span></h2>
+    <h2 class="reveal es">El mismo fractal, en todos los pueblos, en todos los siglos. <span>Míralo sin pestañear.</span></h2>
+
+    <div class="cycle-wrap reveal d1">
+      <div class="c-step"><span class="en">Wound inflicted</span><span class="es">Herida infligida</span></div>
+      <div class="c-arrow">→</div>
+      <div class="c-step"><span class="en">No space to grieve</span><span class="es">Sin espacio para el duelo</span></div>
+      <div class="c-arrow">→</div>
+      <div class="c-step"><span class="en">Pain with nowhere to go</span><span class="es">Dolor sin a dónde ir</span></div>
+      <div class="c-arrow">→</div>
+      <div class="c-step"><span class="en">Converts to defense or aggression</span><span class="es">Se convierte en defensa o agresión</span></div>
+      <div class="c-arrow">→</div>
+      <div class="c-step"><span class="en">New wound created</span><span class="es">Nueva herida creada</span></div>
+      <div class="c-arrow">→</div>
+      <div class="c-step"><span class="en">Cycle continues</span><span class="es">El ciclo continúa</span></div>
+    </div>
+
+    <p class="reveal en">European peasants, dispossessed of their land and dignity across centuries of feudal brutality, became colonizers who could finally put someone beneath them. Enslaved Africans, whose pain had nowhere safe to go, eventually turned some of that pain toward each other. Indigenous peoples, stripped of their foundations, internalized the hierarchy and enforced it among themselves. Jewish survivors of the Holocaust built systems that now produce displacement in another people. Women, trained for millennia to suppress their own needs, sometimes become the harshest critics of other women who dare to want more.</p>
+    <p class="reveal es">Los campesinos europeos, desposeídos de su tierra y dignidad durante siglos de brutalidad feudal, se convirtieron en colonizadores que finalmente podían poner a alguien por debajo de ellos. Los africanos esclavizados, cuyo dolor no tenía a dónde ir de forma segura, eventualmente dirigieron algo de ese dolor hacia ellos mismos. Los pueblos indígenas, despojados de sus fundamentos, internalizaron la jerarquía y la impusieron entre ellos. Los sobrevivientes judíos del Holocausto construyeron sistemas que ahora producen desplazamiento en otro pueblo. Las mujeres, entrenadas durante milenios para suprimir sus propias necesidades, a veces se convierten en las críticas más severas de otras mujeres que se atreven a querer más.</p>
+
+    <p class="reveal d1 en">This is not moral equivalence. The original wound matters. Power differentials matter. History matters. But <em>the mechanism</em> is the same every time: <strong>unwitnessed wound → pain compressing inward or transferring outward → someone else becomes the container for what was never healed.</strong></p>
+    <p class="reveal d1 es">Esto no es equivalencia moral. La herida original importa. Los diferenciales de poder importan. La historia importa. Pero <em>el mecanismo</em> es el mismo cada vez: <strong>herida no presenciada → dolor comprimiéndose hacia adentro o transfiriéndose hacia afuera → alguien más se convierte en el recipiente de lo que nunca fue sanado.</strong></p>
+
+    <p class="reveal d2 en">The question is never <em>"why are they like this?"</em> The real question is always: <strong>"What happened to them — and has anyone ever truly sat with them in it?"</strong></p>
+    <p class="reveal d2 es">La pregunta nunca es <em>"¿por qué son así?"</em> La pregunta real es siempre: <strong>"¿Qué les pasó — y alguien alguna vez verdaderamente se sentó con ellos en eso?"</strong></p>
+  </div>
+</section>
+
+
+<!-- ══ SOUL ══ -->
+<section class="section soul">
+  <div class="section-label">
+    <span class="en">The Soul-Level Teaching</span>
+    <span class="es">La Enseñanza del Alma</span>
+  </div>
+  <div class="soul-inner">
+    <h2 class="reveal en">We are not our pain. We are the witness of it. <em>But first we have to stop running.</em></h2>
+    <h2 class="reveal es">No somos nuestro dolor. Somos el testigo de él. <em>Pero primero tenemos que dejar de huir.</em></h2>
+    <p class="reveal d1 en">Michael Singer in <em>The Untethered Soul</em> identifies the core mechanism: we take a wound, and instead of letting it move through us, we grab it. We clench around it. We build our identity around it. We make it the lens through which we see everything. And then we spend the rest of our lives protecting that clenched place — organizing our entire existence around never having to feel it again.</p>
+    <p class="reveal d1 es">Michael Singer en <em>El Alma sin Ataduras</em> identifica el mecanismo central: tomamos una herida, y en lugar de dejarla moverse a través de nosotros, la agarramos. Nos aferramos a ella. Construimos nuestra identidad alrededor de ella. La convertimos en el lente a través del cual vemos todo. Y luego pasamos el resto de nuestras vidas protegiendo ese lugar aferrado — organizando toda nuestra existencia en torno a nunca tener que volver a sentirlo.</p>
+    <p class="reveal d2 en">For a collective — for a people — the shared inner roommate says: <em>"We are not safe." "The world will take from us." "We must dominate before we are dominated." "We do not deserve to exist."</em> Until that voice is named, it runs everything. The moment you can observe it — rather than <em>be</em> it — everything changes.</p>
+    <p class="reveal d2 es">Para un colectivo — para un pueblo — el compañero interior compartido dice: <em>"No estamos seguros." "El mundo nos quitará." "Debemos dominar antes de ser dominados." "No merecemos existir."</em> Hasta que esa voz es nombrada, lo dirige todo. El momento en que puedes observarla — en lugar de <em>serla</em> — todo cambia.</p>
+    <div class="soul-cols">
+      <div class="soul-col">
+        <h4><span class="en">What Zach Bush Adds</span><span class="es">Lo Que Zach Bush Agrega</span></h4>
+        <p class="en">Zach Bush — physician, microbiologist, one of the most important voices on the relationship between human health and human history — speaks about the body as a receiver of ancestral memory, not just of genes. He describes how the disruption of our relationship to the land — through displacement, through industrial systems, through the severing of people from their earth — is not just an ecological crisis. It is a spiritual one.</p>
+        <p class="es">Zach Bush — médico, microbiólogo, una de las voces más importantes sobre la relación entre la salud humana y la historia humana — habla del cuerpo como receptor de memoria ancestral, no solo de genes. Describe cómo la ruptura de nuestra relación con la tierra — a través del desplazamiento, de los sistemas industriales, de la separación de las personas de su tierra — no es solo una crisis ecológica. Es una espiritual.</p>
+        <p class="en">He speaks now for those who seek — who are ready to receive. This page exists because you are seeking.</p>
+        <p class="es">Habla ahora para quienes buscan — quienes están listos para recibir. Esta página existe porque tú estás buscando.</p>
+      </div>
+      <div class="soul-col">
+        <h4><span class="en">What Jung Named</span><span class="es">Lo Que Jung Nombró</span></h4>
+        <p class="en">Carl Jung spent his life mapping the depths beneath individual consciousness. He identified the <em>shadow</em> — the parts of ourselves we cannot bear to see, that we project outward onto others and persecute in them. The racist who cannot face his own vulnerability attacks it in others. The misogynist who cannot face his own emotions attacks them in women.</p>
+        <p class="es">Carl Jung pasó su vida mapeando las profundidades bajo la conciencia individual. Identificó la <em>sombra</em> — las partes de nosotros mismos que no podemos soportar ver, que proyectamos hacia afuera en otros y perseguimos en ellos. El racista que no puede enfrentar su propia vulnerabilidad la ataca en otros. El misógino que no puede enfrentar sus propias emociones las ataca en las mujeres.</p>
+        <p class="en">Integration — bringing the shadow into conscious awareness — is the only path that does not simply reproduce the wound. You cannot heal what you refuse to see in yourself.</p>
+        <p class="es">La integración — traer la sombra a la conciencia — es el único camino que no simplemente reproduce la herida. No puedes sanar lo que te niegas a ver en ti mismo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ HEALING ══ -->
+<section class="section healing">
+  <div class="section-label">
+    <span class="en">What Actually Breaks the Cycle</span>
+    <span class="es">Lo Que Realmente Rompe el Ciclo</span>
+  </div>
+  <div class="healing-grid">
+    <div class="healing-left">
+      <p class="lead reveal en">"Safety literally changes gene expression within one generation. The body can unlearn the alarm — when it genuinely experiences sustained, real, embodied safety. Not just the absence of threat. The presence of belonging."</p>
+      <p class="lead reveal es">"La seguridad literalmente cambia la expresión génica dentro de una generación. El cuerpo puede desaprender la alarma — cuando genuinamente experimenta seguridad sostenida, real, encarnada. No solo la ausencia de amenaza. La presencia de pertenencia."</p>
+      <ul class="h-list">
+        <li class="reveal d1"><span class="en"><strong>Witnessing.</strong> The wound must be seen. Not managed, not explained away — <em>seen.</em> Individually and collectively. The nervous system cannot begin to regulate until it knows: what happened to me is real, and someone else knows it.</span><span class="es"><strong>Ser testigo.</strong> La herida debe ser vista. No gestionada, no explicada — <em>vista.</em> Individual y colectivamente. El sistema nervioso no puede comenzar a regularse hasta que sabe: lo que me ocurrió es real, y otra persona lo sabe.</span></li>
+        <li class="reveal d2"><span class="en"><strong>Grief given its full space.</strong> Grief that is fully felt does not have to be repeated. The cycle loops because the original pain was never allowed its full expression. When we finally mourn — really mourn, with the body, with others, with time — the wound begins to close from the inside.</span><span class="es"><strong>El duelo en su espacio completo.</strong> El duelo que se siente completamente no tiene que repetirse. El ciclo se repite porque al dolor original nunca se le permitió su expresión completa. Cuando finalmente lloramos — realmente lloramos, con el cuerpo, con otros, con tiempo — la herida comienza a cerrarse desde adentro.</span></li>
+        <li class="reveal d3"><span class="en"><strong>The body and the vagus nerve.</strong> The parasympathetic pathway can be trained back to life — through community, breath, touch, song, movement, rhythm. Every culture that survived trauma built these practices. The Black church. Indigenous ceremony. The Mexican family table. The Jewish Sabbath. These were never just culture. They were biological survival technology.</span><span class="es"><strong>El cuerpo y el nervio vago.</strong> La vía parasimpática puede ser entrenada de vuelta a la vida — a través de la comunidad, la respiración, el tacto, el canto, el movimiento, el ritmo. Cada cultura que sobrevivió al trauma construyó estas prácticas. La iglesia negra. La ceremonia indígena. La mesa familiar mexicana. El Shabat judío. Nunca fueron solo cultura. Fueron tecnología biológica de supervivencia.</span></li>
+        <li class="reveal d4"><span class="en"><strong>Naming the collective inner roommate.</strong> When a people can look at the shared unconscious narrative and see it as a wound rather than a truth, the grip begins to loosen. This requires leaders, artists, teachers, healers willing to name what everyone is feeling but no one is saying.</span><span class="es"><strong>Nombrar al compañero interior colectivo.</strong> Cuando un pueblo puede mirar la narrativa inconsciente compartida y verla como una herida en lugar de una verdad, el agarre comienza a aflojarse. Esto requiere líderes, artistas, maestros, sanadores dispuestos a nombrar lo que todos sienten pero nadie dice.</span></li>
+        <li class="reveal d5"><span class="en"><strong>Truth-telling and reparative justice.</strong> These are not just political acts. They are nervous system medicine administered at the scale of peoples. Acknowledgment. Accountability. The body of a traumatized community needs to know that the world has changed — that it is finally safe to exhale.</span><span class="es"><strong>Decir la verdad y la justicia reparadora.</strong> Estos no son solo actos políticos. Son medicina para el sistema nervioso administrada a escala de pueblos. Reconocimiento. Responsabilidad. El cuerpo de una comunidad traumatizada necesita saber que el mundo ha cambiado — que finalmente es seguro exhalar.</span></li>
+      </ul>
+    </div>
+    <div class="healing-right reveal d2">
+      <h3><span class="en">The Singer Teaching Applied</span><span class="es">La Enseñanza de Singer Aplicada</span></h3>
+      <p class="en">In <em>The Untethered Soul</em>, Singer's core teaching is this: pain is not the problem. Pain is a messenger. The problem is our relationship to the pain — our refusal to let it pass through.</p>
+      <p class="es">En <em>El Alma sin Ataduras</em>, la enseñanza central de Singer es esta: el dolor no es el problema. El dolor es un mensajero. El problema es nuestra relación con el dolor — nuestra negativa a dejarlo pasar.</p>
+      <p class="en">When we close around a wound — when we build our identity around it — we freeze it in time. We carry 1492 in our bodies in 2025. We carry the Middle Passage. We carry the Holocaust. We carry the burning of the midwives.</p>
+      <p class="es">Cuando nos cerramos alrededor de una herida — cuando construimos nuestra identidad alrededor de ella — la congelamos en el tiempo. Llevamos 1492 en nuestros cuerpos en 2025. Llevamos el Pasaje Medio. Llevamos el Holocausto. Llevamos la quema de las parteras.</p>
+      <p class="en">Singer would say: open. Feel it fully — which is terrifying — and then let it move. You are not the pain. You are the vast awareness in which the pain appears. That awareness was never wounded. <em>The feeling is the door.</em></p>
+      <p class="es">Singer diría: ábrete. Siéntelo completamente — lo cual es aterrador — y luego déjalo moverse. No eres el dolor. Eres la vasta conciencia en la que aparece el dolor. Esa conciencia nunca fue herida. <em>El sentimiento es la puerta.</em></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ ONE CONSCIOUSNESS ══ -->
+<section class="section one">
+  <div class="section-label">
+    <span class="en">Although We Are One</span>
+    <span class="es">Aunque Somos Uno</span>
+  </div>
+  <div class="one-inner">
+    <h2 class="reveal en">All of these wounds are <em>one wound, dreaming it is many.</em></h2>
+    <h2 class="reveal es">Todas estas heridas son <em>una sola herida, soñando que son muchas.</em></h2>
+    <p class="reveal d1 en">Every tradition that has looked deeply enough arrives at the same place. The Aztec concept of <em>Ometeotl</em> — the dual creator force containing all opposites. The African Ubuntu — <em>I am because we are.</em> The Jewish <em>tikkun olam</em> — the repair of the world as sacred obligation. The Christian mystical tradition of radical unity. Quantum physics describing entanglement. Jung's collective unconscious. Every path, followed far enough, arrives at the same shore.</p>
+    <p class="reveal d1 es">Cada tradición que ha mirado con suficiente profundidad llega al mismo lugar. El concepto azteca de <em>Ometeotl</em> — la fuerza creadora dual que contiene todos los opuestos. El Ubuntu africano — <em>Soy porque somos.</em> El judío <em>tikkun olam</em> — la reparación del mundo como obligación sagrada. La tradición mística cristiana de la unidad radical. La física cuántica describiendo el entrelazamiento. El inconsciente colectivo de Jung. Cada camino, seguido lo suficientemente lejos, llega a la misma orilla.</p>
+    <p class="reveal d2 en">We are not separate organisms who happen to interact. We are one organism that learned — under the pressure of survival, under the wound of separation — to experience itself as many. The division was the wound. The healing is the remembering.</p>
+    <p class="reveal d2 es">No somos organismos separados que casualmente interactúan. Somos un organismo que aprendió — bajo la presión de la supervivencia, bajo la herida de la separación — a experimentarse como muchos. La división fue la herida. La sanación es el recuerdo.</p>
+    <p class="reveal d3 en"><em>The dam is consciousness.</em> The dam is the moment someone stops, turns toward the pain instead of away from it, and asks: <em>what is this, really? what is beneath it? what is the wound beneath the wound?</em> That question — asked with enough courage and enough compassion — is where the current stops moving forward and begins, finally, to dissipate.</p>
+    <p class="reveal d3 es"><em>La represa es la conciencia.</em> La represa es el momento en que alguien se detiene, se vuelve hacia el dolor en lugar de alejarse de él, y pregunta: <em>¿qué es esto, realmente? ¿qué hay debajo? ¿cuál es la herida debajo de la herida?</em> Esa pregunta — formulada con suficiente valentía y suficiente compasión — es donde la corriente deja de avanzar y comienza, finalmente, a disiparse.</p>
+    <p class="reveal d4 en">You are asking that question. That is not nothing. That is, in fact, <em>everything.</em> Every person who sees this clearly becomes a node in a different kind of network — one where the transmission is not pain, but recognition: <em>I see you. I see what was done to you. I see what it made you do. And I do not confuse any of that with who you actually are.</em></p>
+    <p class="reveal d4 es">Tú estás haciendo esa pregunta. Eso no es nada. Eso es, de hecho, <em>todo.</em> Cada persona que ve esto claramente se convierte en un nodo en un tipo diferente de red — uno donde la transmisión no es dolor, sino reconocimiento: <em>Te veo. Veo lo que te hicieron. Veo lo que eso te hizo hacer. Y no confundo nada de eso con quien realmente eres.</em></p>
+    <p class="reveal d5 en">We are not beyond repair. We never were. The pain convinced us otherwise. And the pain was real — but it was never the whole truth.</p>
+    <p class="reveal d5 es">No estamos más allá de la reparación. Nunca lo estuvimos. El dolor nos convenció de lo contrario. Y el dolor era real — pero nunca fue toda la verdad.</p>
+  </div>
+</section>
+
+
+<!-- ══ CLOSING ══ -->
+<section class="closing">
+  <h2 class="reveal en">The world becomes more beautiful the moment you understand <em>why we are the way we are.</em></h2>
+  <h2 class="reveal es">El mundo se vuelve más hermoso en el momento en que entiendes <em>por qué somos como somos.</em></h2>
+  <p class="reveal d1 en">Not to excuse. Not to surrender. But to finally see every wounded human being — including yourself — as someone whose pain had a beginning. Someone who was once a child who simply needed to be safe and seen and held.</p>
+  <p class="reveal d1 es">No para excusar. No para rendirse. Sino para finalmente ver a cada ser humano herido — incluido tú mismo — como alguien cuyo dolor tuvo un comienzo. Alguien que alguna vez fue un niño que simplemente necesitaba estar seguro, ser visto y sostenido.</p>
+  <p class="reveal d2 en">We don't have to be finished with the process to begin building. We don't have to be healed to help. We don't have to have all the answers to start asking better questions. We just need to be <em>in process.</em> Present. Honest. Willing.</p>
+  <p class="reveal d2 es">No tenemos que haber terminado el proceso para empezar a construir. No tenemos que estar sanados para ayudar. No tenemos que tener todas las respuestas para empezar a hacer mejores preguntas. Solo necesitamos estar <em>en proceso.</em> Presentes. Honestos. Dispuestos.</p>
+  <p class="reveal d3 en">This understanding does not make you passive. It makes you <em>precise.</em> You stop fighting symptoms and start addressing causes. You stop despairing at human nature and start seeing what human nature looks like when it finally — finally — feels safe.</p>
+  <p class="reveal d3 es">Esta comprensión no te hace pasivo. Te hace <em>preciso.</em> Dejas de luchar contra los síntomas y empiezas a abordar las causas. Dejas de desesperarte por la naturaleza humana y empiezas a ver cómo se ve la naturaleza humana cuando finalmente — finalmente — se siente segura.</p>
+  <p class="reveal final-line d4 en">This is where the rescue begins. In you. Right now.</p>
+  <p class="reveal final-line d4 es">Aquí es donde comienza el rescate. En ti. Ahora mismo.</p>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span>Raíz y <em>Rescate</em></span>
+  <span><a href="https://raiz-y-rescate.github.io/raiz-y-rescate/">Raíz y Rescate</a></span>
+  <span><span class="en">First Things First · The Foundation</span><span class="es">Lo Primero es lo Primero · El Fundamento</span></span>
+</footer>
+
+<script>
+  function setLang(l) {
+    document.body.className = 'lang-' + l;
+    document.getElementById('btn-en').className = l === 'en' ? 'active' : '';
+    document.getElementById('btn-es').className = l === 'es' ? 'active' : '';
+    localStorage.setItem('ryr-lang', l);
+  }
+  // Remember preference
+  const saved = localStorage.getItem('ryr-lang');
+  if (saved) setLang(saved);
+
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+  els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
