@@ -12,14 +12,14 @@
 
   <div class="pain-banner">
   <div class="pain-banner-inner">
-    <span class="pain-banner-en">
+    <span data-lang="en">
       <span class="pain-banner-label">Begin here —</span>
       <a href="/raiz-y-rescate/our-pain/" class="pain-link">Our Pain</a>
       <span class="pain-banner-sub">We can only build a new world by seeing what lies beneath. We don't have to be finished with the process to begin. We just need to be in it.</span>
     </span>
-    <span class="pain-banner-es" style="display:none">
+    <span data-lang="es" hidden>
       <span class="pain-banner-label">Empieza aquí —</span>
-    <a href="/raiz-y-rescate/our-pain/" class="pain-link">Nuestro Dolor</a>
+      <a href="/raiz-y-rescate/our-pain/" class="pain-link">Nuestro Dolor</a>
       <span class="pain-banner-sub">Solo podemos construir un mundo nuevo viendo lo que yace debajo. No tenemos que haber terminado el proceso para empezar. Solo necesitamos estar en él.</span>
     </span>
   </div>
@@ -80,25 +80,6 @@
 }
 </style>
 
-<script>
-/* sync with your existing EN/ES toggle */
-(function(){
-  function syncBanner() {
-    var lang = document.body.classList.contains('lang-es') ? 'es' : 'en';
-    var en = document.querySelector('.pain-banner-en');
-    var es = document.querySelector('.pain-banner-es');
-    if (!en || !es) return;
-    en.style.display = lang === 'en' ? '' : 'none';
-    es.style.display = lang === 'es' ? '' : 'none';
-  }
-  /* watch for class changes on body (when toggle fires) */
-  var obs = new MutationObserver(syncBanner);
-  obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-  /* also run on load */
-  document.addEventListener('DOMContentLoaded', syncBanner);
-  syncBanner();
-})();
-</script>
 <body>
   <div class="container">
 
