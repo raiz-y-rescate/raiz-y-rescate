@@ -131,5 +131,40 @@ details .content{
   color: var(--text, #3a3226);
 }
 .ai-note-body p{
+  /* --- Subject rationale (why these subjects matter) --- */
+.rationale-set{
+  margin: 22px 0 4px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.rationale-item{
+  margin-bottom: 24px;
+}
+.rationale-item:last-child{
+  margin-bottom: 0;
+}
+.rationale-title{
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text, inherit);
+  margin: 0 0 4px;
+}
+.rationale-label{
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.rationale-item p{
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text, inherit);
+  margin: 0 0 10px;
+}
+.rationale-emphasis{
+  font-style: italic;
+  color: var(--muted);
+}
   margin: 0 0 0.85rem;
 }
