@@ -1,4 +1,4 @@
-const CACHE = "ryr-v9"; 
+const CACHE = "ryr-v10-repairs-20261023"; 
 
 const ASSETS = [
   "/raiz-y-rescate/",
@@ -42,7 +42,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.map((key) => (key !== CACHE ? caches.delete(key) : null)))
+      Promise.all(keys.map((key) => (key.startsWith("ryr-") && key !== CACHE ? caches.delete(key) : null)))
     )
   );
   self.clients.claim(); // take control immediately
@@ -52,7 +52,8 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const request = event.request;
 
-  if (request.method !== "GET") return;
+  const url = new URL(request.url);
+  if (request.method !== "GET" || url.origin !== self.location.origin || !url.pathname.startsWith("/raiz-y-rescate/")) return;
 
   const accept = request.headers.get("accept") || "";
   const isHTML = accept.includes("text/html");
@@ -62,8 +63,10 @@ self.addEventListener("fetch", (event) => {
       fetch(request)
         .then((response) => {
           // Update cache with fresh HTML
-          const copy = response.clone();
-          caches.open(CACHE).then((cache) => cache.put(request, copy));
+          if (response.ok) {
+            const copy = response.clone();
+            event.waitUntil(caches.open(CACHE).then((cache) => cache.put(request, copy)));
+          }
           return response;
         })
         .catch(() => {
@@ -77,3 +80,4 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
+
