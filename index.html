@@ -9,6 +9,7 @@
 
   <meta name="description" content="Raíz y Rescate — learning, land, structures, and renewal for the era ahead." />
 </head>
+<body>
 
   <div class="pain-banner">
   <div class="pain-banner-inner">
@@ -80,7 +81,6 @@
 }
 </style>
 
-<body>
   <div class="container">
 
     <header class="header">
@@ -239,7 +239,6 @@
       and create your own path forward.
     </span>
 
-   <p>
   <span data-lang="es" hidden>
     Nada de lo que hay aquí se presenta como “la única manera correcta”. Son ideas vivas —
     puntos de partida más que conclusiones. Toma lo que resuene, deja lo que no,
@@ -272,6 +271,10 @@
     if (!enBtn || !esBtn) return; // safety guard
 
     function setLanguage(lang) {
+      lang = lang === "es" ? "es" : "en";
+      document.documentElement.lang = lang;
+      enBtn.setAttribute("aria-pressed", String(lang === "en"));
+      esBtn.setAttribute("aria-pressed", String(lang === "es"));
       document.querySelectorAll("[data-lang]").forEach(el => {
         el.hidden = el.getAttribute("data-lang") !== lang;
       });
@@ -291,3 +294,7 @@
 </script>
 
 </section>
+    </main>
+  </div>
+</body>
+</html>
